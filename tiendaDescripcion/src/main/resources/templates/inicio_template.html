@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FinCiclo</title>
+</head>
+<body>
+{{#bienvenida}}
+	<h1>Bienvenido</h1>
+	{{/bienvenida}}
+	
+	<h1>MODULOS</h1>
+	{{#opcionesModulo}}
+	<a href="/opcion/{{idModulo}}">{{idModulo}}</a><br>
+	{{/opcionesModulo}}
+	
+	{{#hasSubModulos}}
+	<h1>SUB MODULOS</h1>
+	{{/hasSubModulos}}
+	
+	{{#subModulos}}
+	<a href="/opcionsubmodulo/{{idSubModulo}}">{{idSubModulo}}</a><br>
+	{{/subModulos}}
+	
+	{{#hasRecursos}}
+	<h1>RECURSOS ESPECIFICOS</h1>
+	{{/hasRecursos}}
+	{{#recursosEspecificos}}
+	<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{idRecursoEspecifico}}</a><br>
+	{{/recursosEspecificos}}
+	
+	
+	<a href="/adminTools"><button>Herramientas BD</button></a><br>
+	
+	
+</body>
+</html>
