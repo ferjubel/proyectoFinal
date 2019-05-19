@@ -8,18 +8,18 @@
 		<h1>SUB MODULOS</h1>
 		
 		<h1><a href="/adminTools/subModulo/agregar">agregar subModulo</a></h1>
-		<h1><a href="/adminTools/submodulo/editar">editar subModulo</a><br></h1>
-		<h1><a href="/adminTools/submodulo/borrar">borrar subModulo</a><br></h1>
+		<h1><a href="/adminTools/subModulo/editar">editar subModulo</a><br></h1>
+		<h1><a href="/adminTools/subModulo/borrar">borrar subModulo</a><br></h1>
 		{{#isEditar}}
-			{{#opcionesModulo}}
-				<a href="/adminTools/submodulo/editar/{{idSubModulo}}">{{nombreSubModulo}}</a><br>
-			{{/opcionesModulo}}
+			{{#opcionesSubModulo}}
+				<a href="/adminTools/subModulo/editar/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a><br>
+			{{/opcionesSubModulo}}
 		{{/isEditar}}
 		
 		{{#isBorrar}}
-			{{#opcionesModulo}}
-				<a href="/adminTools/submodulo/borrar/{{idSubModulo}}">{{nombreSubModulo}}</a><br>
-			{{/opcionesModulo}}
+			{{#opcionesSubModulo}}
+				<a href="/adminTools/subModulo/borrar/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a><br>
+			{{/opcionesSubModulo}}
 		{{/isBorrar}}
 		
 		{{#mensaje}}

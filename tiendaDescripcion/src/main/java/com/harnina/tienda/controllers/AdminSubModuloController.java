@@ -33,9 +33,7 @@ public class AdminSubModuloController{
 	@RequestMapping("/adminTools/subModulo/editar")
 	public String adminToolsSubModuloEditar(Model model) {
 		model.addAttribute("isEditar","si");
-		model.addAttribute("opcionesModulo", this.dataService.getOpcionesModulo());
 		model.addAttribute("opcionesSubModulo",this.dataService.getSubModulos());
-		model.addAttribute("nombresSubModulo", this.dataService.getNombresSubModulo());
 		return "adminToolsSubModulo_template";
 	}
 	
@@ -60,9 +58,12 @@ public class AdminSubModuloController{
 		return "adminToolsSubModulo_template";
 	}
 	
-	@RequestMapping("/adminTools/SubModulo/editar/{idSubModulo}")
+	@RequestMapping("/adminTools/subModulo/editar/{idSubModulo}")
 	public String adminToolsSubModuloEditarSubModulo(Model model,@PathVariable String idSubModulo) {
-		model.addAttribute("nombre" ,this.dataService.getSubModulo(idSubModulo).getNombreSubModulo().getNombre());
+		model.addAttribute("opcionesModulo", this.dataService.getOpcionesModulo());
+		model.addAttribute("opcionesNombresSubModulo", this.dataService.getNombresSubModulo());
+		model.addAttribute("opcionModuloSelected", this.dataService.getSubModulo(idSubModulo).getModulo().getNombre());
+		model.addAttribute("opcionSubModuloSelected", this.dataService.getSubModulo(idSubModulo).getNombreSubModulo().getNombre());
 		this.idSubModuloActual = idSubModulo;
 		return "adminToolsSubModuloEditar_template";
 	}
