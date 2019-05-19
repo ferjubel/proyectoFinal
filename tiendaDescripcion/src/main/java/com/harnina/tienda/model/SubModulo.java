@@ -22,12 +22,14 @@ public class SubModulo {
 	public SubModulo() {}
 	
 	public SubModulo(Modulo modulo, NombreSubModulo nombreSubModulo) {
-		super();
 		this.modulo = modulo;
 		this.nombreSubModulo = nombreSubModulo;
 	}
 
-
+	public SubModulo(NombreSubModulo nombreSubModulo,Modulo modulo) {
+		this.nombreSubModulo = nombreSubModulo;
+		this.modulo = modulo;
+	}
 
 	public long getIdSubModulo() {
 		return idSubModulo;
@@ -44,7 +46,6 @@ public class SubModulo {
 	public void setIdSubModulo(long idSubModulo) {
 		this.idSubModulo = idSubModulo;
 	}
-
 	public Modulo getModulo() {
 		return modulo;
 	}

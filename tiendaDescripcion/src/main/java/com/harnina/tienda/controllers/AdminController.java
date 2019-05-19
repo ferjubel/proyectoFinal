@@ -26,5 +26,14 @@ public class AdminController {
 		return "adminToolsRecursoEspecifico_template";
 	}
 	
+	@RequestMapping("/adminTools/nombreSubModulo")
+	public String adminToolsNombreSubModulo() {
+		return "adminToolsNombreSubModulo_template";
+	}
+	
+	@RequestMapping("/adminTools/nombreRecursoEspecifico")
+	public String adminToolsNombreRecursoEspecifico() {
+		return "adminToolsNombreRecursoEspecifico_template";
+	}
 	
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminNombreSubModulo</title>
+	</head>
+	<body>
+		<h1>Nombre SubModulo</h1>
+		
+		<h1><a href="/adminTools/nombreSubModulo/agregar">agregar nombreSubModulo</a></h1>
+		<h1><a href="/adminTools/nombreSubModulo/editar">editar nombreSubModulo</a><br></h1>
+		<h1><a href="/adminTools/nombreSubModulo/borrar">borrar nombreSubModulo</a><br></h1>
+		{{#isEditar}}
+			{{#opcionesNombreSubModulo}}
+				<a href="/adminTools/nombreSubModulo/editar/{{idNombreSubModulo}}">{{nombre}}</a><br>
+			{{/opcionesNombreSubModulo}}
+		{{/isEditar}}
+		
+		{{#isBorrar}}
+			{{#opcionesNombreSubModulo}}
+				<a href="/adminTools/nombreSubModulo/borrar/{{idNombreSubModulo}}">{{nombre}}</a><br>
+			{{/opcionesNombreSubModulo}}
+		{{/isBorrar}}
+		
+		{{#mensaje}}
+			<p>{{mensaje}}</p>
+		{{/mensaje}}
+		
+	</body>
+</html>

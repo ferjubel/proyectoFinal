@@ -11,7 +11,7 @@
 	
 	<h1>MODULOS</h1>
 	{{#opcionesModulo}}
-	<a href="/opcion/{{idModulo}}">{{idModulo}}</a><br>
+	<a href="/opcion/{{idModulo}}">{{nombre}}</a><br>
 	{{/opcionesModulo}}
 	
 	{{#hasSubModulos}}
@@ -19,14 +19,14 @@
 	{{/hasSubModulos}}
 	
 	{{#subModulos}}
-	<a href="/opcionsubmodulo/{{idSubModulo}}">{{idSubModulo}}</a><br>
+	<a href="/opcionsubmodulo/{{idSubModulo}}">{{nombreSubModulo}}</a><br>
 	{{/subModulos}}
 	
 	{{#hasRecursos}}
 	<h1>RECURSOS ESPECIFICOS</h1>
 	{{/hasRecursos}}
 	{{#recursosEspecificos}}
-	<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{idRecursoEspecifico}}</a><br>
+	<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombre}}</a><br>
 	{{/recursosEspecificos}}
 	
 	

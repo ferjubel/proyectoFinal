@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminModulos</title>
+	</head>
+	<body>
+		<h1>AGREGAR MODULOS</h1>
+		
+		<form action="/adminTools/subModulo/agregar/guardar" method="post">
+  			<h2>nombreModulo</h2>
+  			<select name = "idModulo">
+  			{{#opcionesModulo}}
+				<option value ="{{idModulo}}">{{nombre}}</option>				
+			{{/opcionesModulo}}
+  			</select>
+  			<select name = "idNombreSubModulo">
+  			{{#opcionesNombresSubModulo}}
+				<option value ="{{idNombreSubModulo}}">{{nombre}}</option>				
+			{{/opcionesNombresSubModulo}}
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

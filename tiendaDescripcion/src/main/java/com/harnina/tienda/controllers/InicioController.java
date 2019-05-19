@@ -8,48 +8,56 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.harnina.tienda.service.DataService;
+
 @Controller
 public class InicioController {
 	
 	@Autowired
-	private DataService cargadorOpciones;
+	private DataService dataService;
 	
-	private long idModuloActual;
-	private long idSubModuloActual;
+	private String idModuloActual;
+	private String idSubModuloActual;
+	private String idRecursoEspecificoActual;
 	
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession session) {
 
 		cargarBienvenida(model,session);
 		
-		model.addAttribute("opcionesModulo" ,this.cargadorOpciones.getOpcionesModulo());
+		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		
 		return "inicio_template";
 	}
 	
 	@RequestMapping("/opcion/{idModulo}")
 	public String enlaceModulo(Model model, @PathVariable String idModulo) {
-		if(this.idModuloActual!=Long.valueOf(idModulo)){
-			this.cargadorOpciones.recargarSubModulos(Long.valueOf(idModulo));
-		}
-		this.idModuloActual = Long.valueOf(idModulo);
-		model.addAttribute("opcionesModulo" ,this.cargadorOpciones.getOpcionesModulo());
-		model.addAttribute("subModulos", this.cargadorOpciones.getSubModulos(this.idModuloActual) );
+		this.idModuloActual = idModulo;
+		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
+		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual) );
 		model.addAttribute("hasSubModulos", true );
 		return "inicio_template";
 	}
 	
 	@RequestMapping("/opcionsubmodulo/{idSubModulo}")
 	public String enlaceSubModulo(Model model, @PathVariable String idSubModulo) {
-		if(this.idSubModuloActual!=Long.valueOf(idSubModulo)){
-			this.cargadorOpciones.recargarSubModulos(Long.valueOf(idSubModulo));
-		}
-		this.idSubModuloActual = Long.valueOf(idSubModulo);
+		this.idSubModuloActual = idSubModulo;
 		model.addAttribute("hasRecursos", true );
 		model.addAttribute("hasSubModulos", true );
-		model.addAttribute("opcionesModulo" ,this.cargadorOpciones.getOpcionesModulo());
-		model.addAttribute("subModulos", this.cargadorOpciones.getSubModulos(this.idModuloActual));
-		model.addAttribute("recursosEspecificos", this.cargadorOpciones.getRecursosEspecificos(this.idSubModuloActual));
+		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
+		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
+		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
+		return "inicio_template";
+	}
+	
+	@RequestMapping("/opcionRecursoEspecifico/{idRecursoEspecifico}")
+	public String enlaceRecursoEspecifico(Model model, @PathVariable String idRecursoEspecifico) {
+		this.idRecursoEspecificoActual = idRecursoEspecifico;
+		model.addAttribute("hasRecursos", true );
+		model.addAttribute("hasSubModulos", true );
+		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
+		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
+		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
 		return "inicio_template";
 	}
 	

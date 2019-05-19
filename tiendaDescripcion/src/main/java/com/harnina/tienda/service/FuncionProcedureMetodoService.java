@@ -1,4 +1,4 @@
-package com.harnina.tienda.controllers;
+package com.harnina.tienda.service;
 
 import java.util.List;
 
@@ -6,18 +6,18 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Modulo;
-import com.harnina.tienda.model.ModuloRepository;
 import com.harnina.tienda.model.NombreRecursoEspecifico;
-import com.harnina.tienda.model.NombreRecursoEspecificoRepository;
 import com.harnina.tienda.model.NombreSubModulo;
-import com.harnina.tienda.model.NombreSubModuloRepository;
 import com.harnina.tienda.model.RecursoEspecifico;
-import com.harnina.tienda.model.RecursoEspecificoRepository;
 import com.harnina.tienda.model.SubModulo;
-import com.harnina.tienda.model.SubModuloRepository;
+import com.harnina.tienda.repository.ModuloRepository;
+import com.harnina.tienda.repository.NombreRecursoEspecificoRepository;
+import com.harnina.tienda.repository.NombreSubModuloRepository;
+import com.harnina.tienda.repository.RecursoEspecificoRepository;
+import com.harnina.tienda.repository.SubModuloRepository;
 
 @Component
-public class DataService {
+public class FuncionProcedureMetodoService {
 	
 	@Autowired
 	private ModuloRepository moduloRepository;
@@ -38,7 +38,7 @@ public class DataService {
 	private List<SubModulo>subModulos;
 	private List<RecursoEspecifico> recursosEspecificos;
 	
-	public DataService() {
+	public FuncionProcedureMetodoService() {
 		super();
 	}
 	/*
@@ -115,13 +115,17 @@ public class DataService {
 			this.recursosEspecificos = recursoEspecificoRepository.findBySubModuloIdSubModulo(idSubModulo);
 	}
 
-	public Modulo getModulo(long idModuloActual) {
+	public Modulo getModulo(long idModulo) {
 		for (Modulo modulo : modulos) {
-			if(modulo.getIdModulo() == Long.valueOf(idModuloActual)){
+			if(modulo.getIdModulo() == idModulo){
 				return modulo;
 			}
 		}
 		return null;
+	}
+	
+	public Modulo getModulo(String idModulo) {
+		return getModulo(Long.valueOf(idModulo));
 	}
 
 	public void guardarModulo(Modulo modulo) {
@@ -137,5 +141,36 @@ public class DataService {
 	public boolean existModulo(Modulo modulo) {
 		return !this.moduloRepository.findByNombre(modulo.getNombre()).isEmpty();
 	}
+
+	public List<SubModulo> getSubModulos() {
+		return this.subModuloRepository.findAll();
+	}
+
+	public SubModulo getSubModulo(Long idSubModuloActual) {
+		for (SubModulo subModulo : subModulos) {
+			if(subModulo.getIdSubModulo() == Long.valueOf(idSubModuloActual)){
+				return subModulo;
+			}
+		}
+		return null;
+	}
+
+	public boolean existSubModulo(SubModulo subModulo) {
+		return !this.subModuloRepository.findByNombreSubModulo(subModulo.getNombreSubModulo()).isEmpty();
+	}
+
+	public void guardarSubModulo(SubModulo subModulo, String idModulo) {
+		this.subModuloRepository.save(subModulo);
+		recargarSubModulos(idModulo);
+	}
+	private void recargarSubModulos(String idModulo) {
+		this.recargarSubModulos(Long.valueOf(idModulo));
+	}
+
+	public SubModulo getSubModulo(String idSubModulo) {
+		return getSubModulo(Long.valueOf(idSubModulo));
+	}
+
+	
 
 }

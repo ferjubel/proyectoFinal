@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>FinCiclo</title>
-</head>
-<body>
-	
-		<a href="/adminTools/modulo">MODULOS</a><br>
-		<a href="/adminTools/subModulo">SUB MODULOS</a><br>
-		<a href="/adminTools/recursoEspecifico">RECURSOS ESPECIFICOS</a><br>
-	
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminSubModulos</title>
+	</head>
+	<body>
+		<h1>SUB MODULOS</h1>
+		
+		<h1><a href="/adminTools/subModulo/agregar">agregar subModulo</a></h1>
+		<h1><a href="/adminTools/submodulo/editar">editar subModulo</a><br></h1>
+		<h1><a href="/adminTools/submodulo/borrar">borrar subModulo</a><br></h1>
+		{{#isEditar}}
+			{{#opcionesModulo}}
+				<a href="/adminTools/submodulo/editar/{{idSubModulo}}">{{nombreSubModulo}}</a><br>
+			{{/opcionesModulo}}
+		{{/isEditar}}
+		
+		{{#isBorrar}}
+			{{#opcionesModulo}}
+				<a href="/adminTools/submodulo/borrar/{{idSubModulo}}">{{nombreSubModulo}}</a><br>
+			{{/opcionesModulo}}
+		{{/isBorrar}}
+		
+		{{#mensaje}}
+			<p>{{mensaje}}</p>
+		{{/mensaje}}
+		
+	</body>
 </html>

@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.harnina.tienda.model.Modulo;
+import com.harnina.tienda.service.DataService;
 
 @Controller
 public class AdminModuloController{
 	
 	@Autowired
 	private DataService dataService;
-	private long idModuloActual;
+	private String idModuloActual;
 	
 	@RequestMapping("/adminTools/modulo/agregar")
 	public String adminToolsModuloAgregar() {
@@ -36,15 +37,15 @@ public class AdminModuloController{
 	
 	@RequestMapping("/adminTools/modulo/borrar/{idModulo}")
 	public String adminToolsModuloBorrarModulo(Model model,@PathVariable String idModulo) {
-		model.addAttribute("nombre" , this.dataService.getModulo(Long.valueOf(idModulo)).getNombre());
-		this.idModuloActual = Long.valueOf(idModulo);
+		model.addAttribute("nombre" , this.dataService.getModulo(idModulo).getNombre());
+		this.idModuloActual = idModulo;
 		return "adminToolsModuloBorrar_template";
 	}
 	
 	@RequestMapping("/adminTools/modulo/editar/{idModulo}")
 	public String adminToolsModuloEditarModulo(Model model,@PathVariable String idModulo) {
-		model.addAttribute("nombre" ,this.dataService.getModulo(Long.valueOf(idModulo)).getNombre());
-		this.idModuloActual = Long.valueOf(idModulo);
+		model.addAttribute("nombre" ,this.dataService.getModulo(idModulo).getNombre());
+		this.idModuloActual = idModulo;
 		return "adminToolsModuloEditar_template";
 	}
 	
@@ -58,7 +59,6 @@ public class AdminModuloController{
 			this.dataService.guardarModulo(modulo);
 			model.addAttribute("mensaje" ,"modulo guardado");
 		}
-		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		return "adminToolsModulo_template";
 	}
 	
@@ -73,7 +73,6 @@ public class AdminModuloController{
 			this.dataService.guardarModulo(modulo);
 			model.addAttribute("mensaje" ,"modulo actualizado");
 		}
-		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		return "adminToolsModulo_template";
 	}
 	
@@ -87,7 +86,6 @@ public class AdminModuloController{
 			this.dataService.borrarModulo(modulo);
 			model.addAttribute("mensaje" ,"modulo borrado");
 		}
-		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		return "adminToolsModulo_template";
 	}
 	
