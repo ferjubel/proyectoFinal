@@ -55,7 +55,7 @@ public class AdminSubModuloController{
 			this.dataService.guardarSubModulo(subModulo);
 			model.addAttribute("mensaje" ,"SubModulo guardado");
 		}
-		return "adminToolsSubModulo_template";
+		return "adminTools_template";
 	}
 	
 	@RequestMapping("/adminTools/subModulo/editar/{idSubModulo}")
@@ -82,7 +82,7 @@ public class AdminSubModuloController{
 			this.dataService.guardarSubModulo(subModulo);
 			model.addAttribute("mensaje" ,"SubModulo actualizado");
 		}
-		return "adminToolsSubModulo_template";
+		return "adminTools_template";
 	}
 	
 	@RequestMapping("/adminTools/subModulo/borrar/guardar")
@@ -95,7 +95,7 @@ public class AdminSubModuloController{
 			this.dataService.borrarSubModulo(subModulo);
 			model.addAttribute("mensaje" ,"SubModulo borrado");
 		}
-		return "adminToolsSubModulo_template";
+		return "adminTools_template";
 	}
 	
 }

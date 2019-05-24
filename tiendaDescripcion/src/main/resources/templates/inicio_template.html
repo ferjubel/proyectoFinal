@@ -11,24 +11,31 @@
 	
 	<h1>MODULOS</h1>
 	{{#opcionesModulo}}
-	<a href="/opcion/{{idModulo}}">{{nombre}}</a><br>
+		<a href="/opcion/{{idModulo}}">{{nombre}}</a><br>
 	{{/opcionesModulo}}
 	
 	{{#hasSubModulos}}
-	<h1>SUB MODULOS</h1>
+		<h1>SUB MODULOS</h1>
 	{{/hasSubModulos}}
 	
 	{{#subModulos}}
-	<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a><br>
+		<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a><br>
 	{{/subModulos}}
 	
-	{{#hasRecursos}}
-	<h1>RECURSOS ESPECIFICOS</h1>
-	{{/hasRecursos}}
+	{{#hasRecursosEspecificos}}
+		<h1>RECURSOS ESPECIFICOS</h1>
+	{{/hasRecursosEspecificos}}
 	{{#recursosEspecificos}}
-	<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombre}}</a><br>
+		<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a><br>
 	{{/recursosEspecificos}}
 	
+	
+	{{#hasRecursos}}
+		<h1>{{nombre}} </h1>
+	{{/hasRecursos}}
+	{{#recursos}}
+		<a href="/opcionRecursoEspecifico/{{idRecurso}}">{{nombre}}</a><br><br><br>
+	{{/recursos}}
 	
 	<a href="/adminTools"><button>Herramientas BD</button></a><br>
 	

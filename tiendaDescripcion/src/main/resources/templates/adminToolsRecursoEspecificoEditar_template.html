@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminEditarRecursoEspecifico</title>
+	</head>
+	<body>
+		<h1>EDITAR RECURSO ESPECIFICO</h1>
+		<p>Nombre subModulo Actual {{recursoEspecifico.subModulo.nombreSubModulo}}</p>
+		<p>Nombre recurso especifico Actual {{recursoEspecifico.nombreRecursoEspecifico.nombre}}</p>
+		
+		<form action="/adminTools/recursoEspecifico/editar/guardar" method="post">
+  			<select name = "idSubModulo">
+  			{{#opcionesSubModulo}}
+				<option value ="{{idSubModulo}}">{{nombreSubModulo.nombre}}</option>				
+			{{/opcionesSubModulo}}
+  			</select>
+  			<select name = "idNombreRecursoEspecifico">
+  			{{#opcionesNombreRecursoEspecifico}}
+				<option value ="{{idNombreRecursoEspecifico}}">{{nombre}}</option>				
+			{{/opcionesNombreRecursoEspecifico}}
+  			</select>
+	  		<input type='submit' value='Modificar'/>
+		</form>
+		
+	</body>
+</html>

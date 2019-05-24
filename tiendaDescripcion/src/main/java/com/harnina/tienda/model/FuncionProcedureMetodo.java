@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.harnina.tienda.service.RecursoService;
+
 @Entity
-public class FuncionProcedureMetodo {
+public class FuncionProcedureMetodo implements Recurseable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +30,6 @@ public class FuncionProcedureMetodo {
 	 private List<Parametro> parametros;
 	
 	public FuncionProcedureMetodo() {}
-	
 	
 
 	public FuncionProcedureMetodo(String nombre, String codigo, String descripcion, RecursoEspecifico recursoEspecifico,
@@ -88,6 +89,30 @@ public class FuncionProcedureMetodo {
 	@Override
 	public String toString() {
 		return "RecursoEspecifico" + nombre;
+	}
+
+	@Override
+	public long getId() {
+		return this.idFuncionProcedureMetodo;
+	}
+
+	@Override
+	public long getIdRecursoEspecifico() {
+		return this.recursoEspecifico.getIdRecursoEspecifico();
+	}
+
+
+	@Override
+	public void guardar(RecursoService recursoService) {
+		recursoService.guardarRecurso(this);
+		
+	}
+
+
+	@Override
+	public void borrar(RecursoService recursoService) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

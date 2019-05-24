@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Modulo;
 import com.harnina.tienda.model.NombreRecursoEspecifico;
 import com.harnina.tienda.model.NombreSubModulo;
+import com.harnina.tienda.model.Recurseable;
 import com.harnina.tienda.model.RecursoEspecifico;
 import com.harnina.tienda.model.SubModulo;
 
@@ -27,6 +30,9 @@ public class DataService {
 
 	@Autowired
 	private NombreRecursoEspecificoService nombreRecursoEspecificoService;
+	
+	@Autowired
+	private RecursoService recursoService;
 	
 	public DataService() {
 		super();
@@ -114,6 +120,10 @@ public class DataService {
 	public void guardarRecursoEspecifico(RecursoEspecifico recursoEspecifico, String idSubModulo) {
 		SubModulo subModulo = this.subModuloService.getSubModulo(Long.valueOf(idSubModulo));
 		recursoEspecifico.setSubModulo(subModulo);
+		guardarRecursoEspecifico(recursoEspecifico);
+	}
+	
+	public void guardarRecursoEspecifico(RecursoEspecifico recursoEspecifico) {
 		this.recursoEspecificoService.guardarRecursoEspecifico(recursoEspecifico);
 	}
 	
@@ -164,6 +174,32 @@ public class DataService {
 	public void borrarNombreRecursoEspecifico(NombreRecursoEspecifico nombreRecursoEspecifico) {
 		this.nombreRecursoEspecificoService.borrarNombreRecursoEspecifico(nombreRecursoEspecifico);
 	}
+	
+	
+	
+
+	public List<Recurseable> getRecursos(String idRecursoEspecifico) {
+		return this.recursoService.getRecursos(Long.valueOf(idRecursoEspecifico));
+	}
+
+	public List<Recurseable> getRecursos() {
+		return this.recursoService.getRecursos();
+	}
+	
+	public boolean existRecurso(FuncionProcedureMetodo recurso) {
+		return this.recursoService.existRecurso(recurso);
+	}
+
+	public void guardarRecurso(Recurseable recurso) {
+		this.recursoService.guardarRecurso(recurso);
+	}
+	
+	public void borrarRecurso(Recurseable recurso) {
+		this.recursoService.borrarRecurso(recurso);
+	}
+	
+	
+	
 
 	/*
 	@PostConstruct

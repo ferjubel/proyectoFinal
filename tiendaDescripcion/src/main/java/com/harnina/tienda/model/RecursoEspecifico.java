@@ -13,8 +13,6 @@ public class RecursoEspecifico {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idRecursoEspecifico;
 	
-	private String nombre;
-
 	@OneToOne
 	 private SubModulo subModulo;
 	
@@ -23,10 +21,9 @@ public class RecursoEspecifico {
 	
 	public RecursoEspecifico() {}
 	
-	public RecursoEspecifico(String nombre, SubModulo subModulo,
+	public RecursoEspecifico(SubModulo subModulo,
 			NombreRecursoEspecifico nombreRecursoEspecifico) {
 		super();
-		this.nombre = nombre;
 		this.subModulo = subModulo;
 		this.nombreRecursoEspecifico = nombreRecursoEspecifico;
 	}
@@ -38,14 +35,6 @@ public class RecursoEspecifico {
 
 	public void setIdRecursoEspecifico(long idRecursoEspecifico) {
 		this.idRecursoEspecifico = idRecursoEspecifico;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public SubModulo getSubModulo() {
@@ -66,7 +55,7 @@ public class RecursoEspecifico {
 
 	@Override
 	public String toString() {
-		return "RecursoEspecifico" + nombre;
+		return "RecursoEspecifico" + nombreRecursoEspecifico.getNombre();
 	}
 
 }

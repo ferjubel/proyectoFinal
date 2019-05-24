@@ -34,8 +34,8 @@ public class InicioController {
 	public String enlaceModulo(Model model, @PathVariable String idModulo) {
 		this.idModuloActual = idModulo;
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
-		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual) );
 		if(this.dataService.getSubModulos(this.idModuloActual).size()>0){
+			model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
 			model.addAttribute("hasSubModulos", true );
 		}
 		return "inicio_template";
@@ -44,26 +44,27 @@ public class InicioController {
 	@RequestMapping("/opcionSubmodulo/{idSubModulo}")
 	public String enlaceSubModulo(Model model, @PathVariable String idSubModulo) {
 		this.idSubModuloActual = idSubModulo;
-		model.addAttribute("hasRecursos", true );
-		if(this.dataService.getSubModulos(this.idModuloActual).size()>0){
-			model.addAttribute("hasSubModulos", true );
-		}
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
-		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
+		if(this.dataService.getRecursosEspecificos(idSubModulo).size()>0){
+			model.addAttribute("hasSubModulos", true );
+			model.addAttribute("hasRecursosEspecificos", true );
+			model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
+		}
 		return "inicio_template";
 	}
 	
 	@RequestMapping("/opcionRecursoEspecifico/{idRecursoEspecifico}")
 	public String enlaceRecursoEspecifico(Model model, @PathVariable String idRecursoEspecifico) {
 		this.idRecursoEspecificoActual = idRecursoEspecifico;
-		if(this.dataService.getRecursosEspecificos(this.idSubModuloActual).size()>0){
-			model.addAttribute("hasRecursos", true );
-		}
 		model.addAttribute("hasSubModulos", true );
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
+		if(this.dataService.getRecursos(idRecursoEspecifico).size()>0){
+			model.addAttribute("hasRecursos", true );
+			model.addAttribute("recursos", this.dataService.getRecursos(idRecursoEspecifico));
+		}
 		return "inicio_template";
 	}
 	

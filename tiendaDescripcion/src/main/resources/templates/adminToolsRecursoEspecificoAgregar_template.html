@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminModulos</title>
+	</head>
+	<body>
+		<h1>AGREGAR RECURSO ESPECIFICO</h1>
+		
+		<form action="/adminTools/recursoEspecifico/agregar/guardar" method="post">
+  			<select name = "idSubModulo">
+  			{{#opcionesSubModulo}}
+				<option value ="{{idSubModulo}}">{{nombreSubModulo.nombre}}</option>				
+			{{/opcionesSubModulo}}
+  			</select>
+  			<select name = "idNombreRecursoEspecifico">
+  			{{#opcionesNombreRecursoEspecifico}}
+				<option value ="{{idNombreRecursoEspecifico}}">{{nombre}}</option>				
+			{{/opcionesNombreRecursoEspecifico}}
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

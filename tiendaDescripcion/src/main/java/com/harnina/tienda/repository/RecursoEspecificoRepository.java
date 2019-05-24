@@ -10,6 +10,6 @@ public interface RecursoEspecificoRepository extends JpaRepository<RecursoEspeci
 
 	List<RecursoEspecifico> findBySubModuloIdSubModulo(long idSubModulo);
 
-	List<RecursoEspecifico> findByNombre(String nombre);
+	List<RecursoEspecifico> findByNombreRecursoEspecificoIdNombreRecursoEspecifico(long idNombreRecursoEspecifico);
 
 }

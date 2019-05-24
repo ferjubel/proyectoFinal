@@ -1,5 +1,6 @@
 package com.harnina.tienda.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,26 +27,30 @@ public class RecursoEspecificoService {
 	}
 	
 	public List<RecursoEspecifico> getRecursosEspecificos(long idSubModulo) {
-		this.recursosEspecificos.clear();
-		for (RecursoEspecifico recursoEspecifico : recursosEspecificos) {
+		if(this.recursosEspecificos==null)recargarRecursosEspecificos();
+		List<RecursoEspecifico> retorno = new ArrayList<>();
+		for (RecursoEspecifico recursoEspecifico : this.recursosEspecificos) {
 			if(recursoEspecifico.getSubModulo().getIdSubModulo() == idSubModulo){
-				this.recursosEspecificos.add(recursoEspecifico);
+				retorno.add(recursoEspecifico);
 			}
 		}
-		return this.recursosEspecificos;
+		return retorno;
 	}
 
 	public RecursoEspecifico getRecursoEspecifico(long idSubModulo) {
-		for (RecursoEspecifico nombreSubModulo : recursosEspecificos) {
-			if(nombreSubModulo.getIdRecursoEspecifico() == idSubModulo){
-				return nombreSubModulo;
+		if(this.recursosEspecificos==null)recargarRecursosEspecificos();
+		for (RecursoEspecifico recursoEspecifico : this.recursosEspecificos) {
+			if(recursoEspecifico.getSubModulo().getIdSubModulo() == idSubModulo){
+				return recursoEspecifico;
 			}
 		}
 		return null;
+		
 	}
 
-	public boolean existRecursoEspecifico(RecursoEspecifico nombreSubModulo) {
-		return !this.recursoEspecificoRepository.findByNombre(nombreSubModulo.getNombre()).isEmpty();
+	public boolean existRecursoEspecifico(RecursoEspecifico recursoEspecifico) {
+		return !this.recursoEspecificoRepository.findBySubModuloIdSubModulo(recursoEspecifico.getSubModulo().getIdSubModulo()).isEmpty() &&
+				!this.recursoEspecificoRepository.findByNombreRecursoEspecificoIdNombreRecursoEspecifico(recursoEspecifico.getNombreRecursoEspecifico().getIdNombreRecursoEspecifico()).isEmpty();
 	}
 
 	public void guardarRecursoEspecifico(RecursoEspecifico recursoEspecifico) {
