@@ -11,33 +11,46 @@
 	
 	<h1>MODULOS</h1>
 	{{#opcionesModulo}}
-		<a href="/opcion/{{idModulo}}">{{nombre}}</a><br>
+		<a href="/opcion/{{idModulo}}">{{nombre}}</a>
 	{{/opcionesModulo}}
 	
 	{{#hasSubModulos}}
 		<h1>SUB MODULOS</h1>
 	{{/hasSubModulos}}
-	
 	{{#subModulos}}
-		<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a><br>
+		<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a>
 	{{/subModulos}}
 	
 	{{#hasRecursosEspecificos}}
 		<h1>RECURSOS ESPECIFICOS</h1>
 	{{/hasRecursosEspecificos}}
 	{{#recursosEspecificos}}
-		<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a><br>
+		<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a>
 	{{/recursosEspecificos}}
-	
 	
 	{{#hasRecursos}}
 		<h1>RECURSOS </h1>
 	{{/hasRecursos}}
 	{{#recursos}}
-		<a href="/opcionRecursoEspecifico/{{idRecurso}}">{{nombre}}</a><br><br><br>
+		<a href="/opcionRecurso/{{idRecurso}}">{{nombre}}</a>
 	{{/recursos}}
 	
-	<a href="/adminTools"><button>Herramientas BD</button></a><br>
+	{{#detallesRecurso}} 
+	 		<h2>Nombre</h2>
+    		 {{nombre}}
+    		  {{#descripcion}} 
+    		  	 <h2>descripcion</h2>
+    			 {{descripcion}}
+    		  {{/descripcion}}
+    		  {{#codigo}} 
+    		  	 <h2>Codigo</h2>
+    			 {{codigo}}
+    		  {{/codigo}}
+	{{/detallesRecurso}}
+	
+	
+	
+	<a href="/adminTools"><button>Herramientas BD</button></a>
 	
 	
 </body>
