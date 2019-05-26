@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminRecursoEditar</title>
+	</head>
+	<body>
+		<h1>EDITAR RECURSO</h1>
+		
+		<form action="/adminTools/recursoEspecifico/editar/guardar" method="post">
+  			<select name = "idRecursoEspecifico">
+  			{{#opcionesRecursoEspecifico}}
+				<option value ="{{idRecursoEspecifico}}">{{nombre}}</option>				
+			{{/opcionesRecursoEspecifico}}
+  			</select>
+  			<select name = "idRecurso">
+  			{{#opcionesRecurso}}
+				<option value ="{{idRecurso}}">{{nombre}}</option>				
+			{{/opcionesRecurso}}
+  			</select>
+  			
+  			<input type="text" name="nombre" value="{{nombre}}">
+  			<textarea name="descripcion">{{descripcion}}</textarea>
+  			<textarea name="codigo">{{codigo}}</textarea>
+  			
+	  		<input type='submit' value='Editar'/>
+		</form>
+		
+	</body>
+</html>

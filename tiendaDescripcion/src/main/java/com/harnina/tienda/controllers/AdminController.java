@@ -36,4 +36,9 @@ public class AdminController {
 		return "adminToolsNombreRecursoEspecifico_template";
 	}
 	
+	@RequestMapping("/adminTools/recurso")
+	public String adminToolsRecurso() {
+		return "adminToolsRecurso_template";
+	}
+	
 }

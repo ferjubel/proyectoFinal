@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
 import com.harnina.tienda.service.RecursoService;
 
 @Entity
@@ -17,7 +16,7 @@ public class FuncionProcedureMetodo implements Recurseable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idFuncionProcedureMetodo;
+	private long idRecurso;
 	
 	private String nombre;
 	private String codigo;
@@ -41,11 +40,19 @@ public class FuncionProcedureMetodo implements Recurseable{
 		this.recursoEspecifico = recursoEspecifico;
 		this.parametros = parametros;
 	}
-
-	public long getIdFuncionProcedureMetodo() {
-		return idFuncionProcedureMetodo;
+	
+	public FuncionProcedureMetodo(String nombre, String codigo, String descripcion) {
+		super();
+		this.nombre = nombre;
+		this.codigo = codigo;
+		this.descripcion = descripcion;
 	}
 
+	public long getIdFuncionProcedureMetodo() {
+		return idRecurso;
+	}
+	
+	@Override
 	public String getNombre() {
 		return nombre;
 	}
@@ -92,8 +99,8 @@ public class FuncionProcedureMetodo implements Recurseable{
 	}
 
 	@Override
-	public long getId() {
-		return this.idFuncionProcedureMetodo;
+	public long getIdRecurso() {
+		return this.idRecurso;
 	}
 
 	@Override
@@ -101,18 +108,14 @@ public class FuncionProcedureMetodo implements Recurseable{
 		return this.recursoEspecifico.getIdRecursoEspecifico();
 	}
 
-
 	@Override
 	public void guardar(RecursoService recursoService) {
 		recursoService.guardarRecurso(this);
-		
 	}
-
 
 	@Override
 	public void borrar(RecursoService recursoService) {
-		// TODO Auto-generated method stub
-		
+		recursoService.borrarRecurso(this);
 	}
 
 }

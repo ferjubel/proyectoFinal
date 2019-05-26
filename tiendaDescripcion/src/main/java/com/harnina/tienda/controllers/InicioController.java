@@ -58,6 +58,7 @@ public class InicioController {
 	public String enlaceRecursoEspecifico(Model model, @PathVariable String idRecursoEspecifico) {
 		this.idRecursoEspecificoActual = idRecursoEspecifico;
 		model.addAttribute("hasSubModulos", true );
+		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));

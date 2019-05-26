@@ -1,11 +1,8 @@
 package com.harnina.tienda.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Modulo;
 import com.harnina.tienda.model.NombreRecursoEspecifico;
 import com.harnina.tienda.model.NombreSubModulo;
@@ -186,7 +183,7 @@ public class DataService {
 		return this.recursoService.getRecursos();
 	}
 	
-	public boolean existRecurso(FuncionProcedureMetodo recurso) {
+	public boolean existRecurso(Recurseable recurso) {
 		return this.recursoService.existRecurso(recurso);
 	}
 
@@ -196,6 +193,14 @@ public class DataService {
 	
 	public void borrarRecurso(Recurseable recurso) {
 		this.recursoService.borrarRecurso(recurso);
+	}
+
+	public List<Recurseable> getFunctionesProceduresMetodos() {
+		return this.recursoService.getRecursos();
+	}
+
+	public Recurseable getRecurso(String idRecurso,String idRecursoEspecifico) {
+		return this.recursoService.getRecurso(idRecurso,idRecursoEspecifico);
 	}
 	
 	

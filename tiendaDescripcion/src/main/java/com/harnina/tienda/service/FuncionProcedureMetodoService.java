@@ -44,23 +44,6 @@ public class FuncionProcedureMetodoService implements RecursoServiceable{
 		return retorno;
 	}
 	
-	@Override
-	public Recurseable getRecurso(long id) {
-		if(this.funcionProcedureMetodoList==null)recargarFuncionProcedureMetodo();
-		for (FuncionProcedureMetodo funcionProcedureMetodo : this.funcionProcedureMetodoList) {
-			if(funcionProcedureMetodo.getId() == id){
-				return funcionProcedureMetodo;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public boolean existRecurso(FuncionProcedureMetodo funcionProcedureMetodo) {
-		return !this.funcionProcedureMetodoRepository.findByNombre(funcionProcedureMetodo.getNombre()).isEmpty();
-	}
-
-	@Override
 	public void guardarRecurso(FuncionProcedureMetodo funcionProcedureMetodo) {
 		this.funcionProcedureMetodoRepository.save(funcionProcedureMetodo);
 		recargarFuncionProcedureMetodo();
@@ -70,7 +53,6 @@ public class FuncionProcedureMetodoService implements RecursoServiceable{
 		this.funcionProcedureMetodoList = funcionProcedureMetodoRepository.findAll();
 	}
 	
-	@Override
 	public void borrarRecurso(FuncionProcedureMetodo nombre) {
 		this.funcionProcedureMetodoRepository.delete(nombre);
 		recargarFuncionProcedureMetodo();

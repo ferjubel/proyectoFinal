@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminRecurso</title>
+	</head>
+	<body>
+		<h1>Recurso</h1>
+		
+		<h1><a href="/adminTools/recurso/agregar">agregar Recurso</a></h1>
+		<h1><a href="/adminTools/recurso/editar">editar Recurso</a><br></h1>
+		<h1><a href="/adminTools/recurso/borrar">borrar Recurso</a><br></h1>
+		
+		{{#isAgregar}}
+			{{#opcionesRecursoEspecifico}}
+				<a href="/adminTools/recurso/agregar/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a><br>
+			{{/opcionesRecursoEspecifico}}
+		{{/isAgregar}}
+		
+		{{#isEditar}}
+			{{#opcionesRecurso}}
+				<form action="/adminTools/recurso/editar/{{recursoEspecifico.idRecursoEspecifico}}">{{nombreRecursoEspecifico}}
+					<input type="hidden" name="idRecurso" value="{{idRecurso}}">
+					<button type="submit">editar</button>
+				</form><br>
+			{{/opcionesRecurso}}
+		{{/isEditar}}
+		
+		{{#isBorrar}}
+			{{#opcionesRecurso}}
+				<form action="/adminTools/recurso/borrar/{{recursoEspecifico.idRecursoEspecifico}}">{{nombreRecursoEspecifico}}
+					<input type="hidden" name="idRecurso" value="{{idRecurso}}">
+					<button type="submit">borrar</button>
+				</form><br>
+			{{/opcionesRecurso}}
+		{{/isBorrar}}
+		
+		{{#mensaje}}
+			<p>{{mensaje}}</p>
+		{{/mensaje}}
+		
+	</body>
+</html>
