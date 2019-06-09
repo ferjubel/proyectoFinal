@@ -1,57 +1,62 @@
 package com.harnina.tienda.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Parametro;
+import com.harnina.tienda.model.Parteable;
 import com.harnina.tienda.repository.ParametroRepository;
 
 @Component
-public class ParametroService {
+public class ParametroService implements ParteServiceable{
 	
 	@Autowired
-	private ParametroRepository nombreSubModuloRepository;
+	private ParametroRepository parametroRepository;
 	
-	private List<Parametro> nombresSubModulo;
+	private List<Parametro> parametros;
 
 	public ParametroService() {
 		super();
 	}
 
-	public List<Parametro> getNombresSubModulo() {
-		if(this.nombresSubModulo==null){
-			this.nombresSubModulo = nombreSubModuloRepository.findAll();
-		}
-		return this.nombresSubModulo;
-	}
-
-	public Parametro getParametro(long idSubModulo) {
-		for (Parametro nombreSubModulo : nombresSubModulo) {
-			if(nombreSubModulo.getIdParametro() == idSubModulo){
-				return nombreSubModulo;
+	public Parametro getParametro(long idParte) {
+		for (Parametro parametro : parametros) {
+			if(parametro.getIdParte() == idParte){
+				return parametro;
 			}
 		}
 		return null;
 	}
 
-	public boolean existParametro(Parametro nombreSubModulo) {
-		return !this.nombreSubModuloRepository.findByNombre(nombreSubModulo.getNombre()).isEmpty();
+	public boolean existParametro(Parametro parametro) {
+		return !this.parametroRepository.findByNombre(parametro.getNombre()).isEmpty();
 	}
 
-	public void guardarParametro(Parametro nombreSubModulo) {
-		this.nombreSubModuloRepository.save(nombreSubModulo);
+	public void guardarParametro(Parametro parametro) {
+		this.parametroRepository.save(parametro);
 		recargarParametro();
 	}
 
 	private void recargarParametro() {
-		this.nombresSubModulo = nombreSubModuloRepository.findAll();
+		this.parametros = parametroRepository.findAll();
 	}
 	
-	public void borrarParametro(Parametro nombreSubModulo) {
-		this.nombreSubModuloRepository.delete(nombreSubModulo);
+	public void borrarParametro(Parametro parametro) {
+		this.parametroRepository.delete(parametro);
 		recargarParametro();
 	}
 
+	@Override
+	public Set<Parteable> getPartes() {
+		if(this.parametros==null){
+			recargarParametro();
+		}
+		Set<Parteable> retorno = new TreeSet<>();
+		retorno.addAll(this.parametros);
+		return retorno;
+	}
 	
 
 }

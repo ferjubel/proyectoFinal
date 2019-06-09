@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminParte</title>
+	</head>
+	<body>
+		<h1>PARTES</h1>
+		
+		<h1><a href="/adminTools/parte/agregar">agregar Parte</a></h1>
+		<h1><a href="/adminTools/parte/editar">editar Parte</a><br></h1>
+		<h1><a href="/adminTools/parte/borrar">borrar Parte</a><br></h1>
+		
+		{{#isAgregar}}
+			{{#opcionesParte}}
+				<a href="/adminTools/parte/agregar/{{nombre}}">{{nombre}}</a><br>
+			{{/opcionesParte}}
+		{{/isAgregar}}
+		
+		{{#isEditar}}
+		{{#opcionesRecurso}}
+			<form action="/adminTools/parte/editar/{{idRecurso}}">
+				<input type="hidden" name="idRecursoEspecifico" value="{{recursoEspecifico.idRecursoEspecifico}}">
+				{{#partes}}
+					<select name = "idParte">
+			  			{{#partes}}
+							<option value ="{{idParte}}">{{nombre}}</option>				
+						{{/partes}}
+  					</select>
+				{{/partes}}
+				<button type="submit">guardar</button>
+			</form><br>
+		{{/opcionesRecurso}}
+		{{/isEditar}}
+		
+		{{#isBorrar}}
+			{{#opcionesRecurso}}
+				<form action="/adminTools/parte/borrar/{{idRecurso}}">
+					<input type="hidden" name="idRecursoEspecifico" value="{{recursoEspecifico.idRecursoEspecifico}}">
+					{{#partes}}
+						<select name = "idParte">
+				  			{{#partes}}
+								<option value ="{{idParte}}">{{nombre}}</option>				
+							{{/partes}}
+	  					</select>
+					{{/partes}}
+					<button type="submit">guardar</button>
+				</form><br>
+			{{/opcionesRecurso}}
+		{{/isBorrar}}
+		
+		{{#mensaje}}
+			<p>{{mensaje}}</p>
+		{{/mensaje}}
+		
+	</body>
+</html>

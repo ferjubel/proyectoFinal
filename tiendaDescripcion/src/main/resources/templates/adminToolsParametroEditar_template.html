@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>FuncionProcedureMetodoAgregar</title>
+	</head>
+	<body>
+		<h1>AGREGAR FuncionProcedureMetodo</h1>
+		
+		<form name= "parametro" action="/adminTools/recurso/agregar/guardarFuncionProcedureMetodo" method="post">
+  			<input type="text" name="nombre">nombre
+  			<select name = "tipoDeDato">
+  			{{#tipoDeDato}}
+				<option value ="{{tipo}}">{{tipo}}</option>				
+			{{/tipoDeDato}}
+  			</select>
+				<option value ="in">entrada</option>
+				<option value ="out">salida</option>
+				<option value ="inout">entrada y salida</option>				
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

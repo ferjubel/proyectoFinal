@@ -74,15 +74,13 @@ public class InicioController {
 	@RequestMapping("/opcionRecurso/{idRecurso}")
 	public String enlaceRecurso(Model model, @PathVariable String idRecurso) {
 		this.idRecursoActual = idRecurso;
-		model.addAttribute("hasSubModulos", true );
-		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
+		model.addAttribute("hasSubModulos", true );
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
+		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
-		if(this.dataService.getRecursos(idRecurso).size()>0){
-			model.addAttribute("hasRecursos", true );
-			model.addAttribute("recursos", this.dataService.getRecursos(idRecursoEspecificoActual));
-		}
+		model.addAttribute("hasRecursos", true );
+		model.addAttribute("recursos", this.dataService.getRecursos(idRecursoEspecificoActual));
 		model.addAttribute("detallesRecurso", this.dataService.getRecurso(idRecursoActual, idRecursoEspecificoActual));
 		return "inicio_template";
 	}

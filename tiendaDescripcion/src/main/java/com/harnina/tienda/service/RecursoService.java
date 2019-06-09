@@ -78,6 +78,7 @@ public class RecursoService {
 	}
 
 	public Recurseable getRecurso(String idRecurso,String idRecursoEspecifico) {
+		comprobarListas();
 		for (Recurseable recurseable : recursos) {
 			if(recurseable.getIdRecurso() == Long.valueOf(idRecurso).longValue() && 
 			recurseable.getIdRecursoEspecifico() == Long.valueOf(idRecursoEspecifico)){

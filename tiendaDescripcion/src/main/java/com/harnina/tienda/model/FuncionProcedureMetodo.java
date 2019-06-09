@@ -1,13 +1,13 @@
 package com.harnina.tienda.model;
 
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import com.harnina.tienda.service.RecursoService;
 
@@ -25,14 +25,14 @@ public class FuncionProcedureMetodo implements Recurseable{
 	@OneToOne
 	 private RecursoEspecifico recursoEspecifico;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	 private List<Parametro> parametros;
+	@ManyToMany
+	 private Set <Parametro> parametros;
 	
 	public FuncionProcedureMetodo() {}
 	
 
 	public FuncionProcedureMetodo(String nombre, String codigo, String descripcion, RecursoEspecifico recursoEspecifico,
-			List<Parametro> parametros) {
+			Set<Parametro> parametros) {
 		super();
 		this.nombre = nombre;
 		this.codigo = codigo;
@@ -85,11 +85,11 @@ public class FuncionProcedureMetodo implements Recurseable{
 		this.recursoEspecifico = recursoEspecifico;
 	}
 
-	public List<Parametro> getParametros() {
+	public Set<Parametro> getParametros() {
 		return parametros;
 	}
 
-	public void setParametros(List<Parametro> parametros) {
+	public void setParametros(Set<Parametro> parametros) {
 		this.parametros = parametros;
 	}
 
@@ -116,6 +116,17 @@ public class FuncionProcedureMetodo implements Recurseable{
 	@Override
 	public void borrar(RecursoService recursoService) {
 		recursoService.borrarRecurso(this);
+	}
+
+	public void asociarParte(Parametro parte){
+		if(this.parametros == null)this.parametros = new TreeSet<>();
+		this.parametros.add(parte);
+	}
+
+
+	@Override
+	public void asociarParte(Parteable parte) {
+		this.asociarParte(parte);
 	}
 
 }

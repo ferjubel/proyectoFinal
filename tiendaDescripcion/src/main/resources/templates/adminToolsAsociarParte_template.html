@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminModulos</title>
+	</head>
+	<body>
+		<h1>ASOCIAR PARTE A RECURSO</h1>
+		
+		<form action="/adminTools/asociarParte/guardar" method="post">
+  			<select name = "idRecursoEspecifico">
+  			{{#opcionesRecursoEspecifico}}
+				<option value ="{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</option>				
+			{{/opcionesRecursoEspecifico}}
+  			</select>
+  			<select name = "idRecurso">
+  			{{#opcionesRecurso}}
+				<option value ="{{idRecurso}}">{{nombre}}</option>				
+			{{/opcionesRecurso}}
+  			</select>
+  			<select name = "idParte">
+  			{{#opcionesParte}}
+				<option value ="{{idParte}},{{nombre}}">{{nombre}}</option>
+			{{/opcionesParte}}
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

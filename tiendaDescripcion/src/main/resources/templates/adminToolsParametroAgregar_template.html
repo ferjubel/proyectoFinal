@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>FuncionProcedureMetodoAgregar</title>
+	</head>
+	<body>
+		<h1>AGREGAR PARAMETRO</h1>
+		
+		<form name= "parametro" action="/adminTools/parte/agregar/parametro/guardar" method="post">
+  			<input type="text" name="nombre" placeholder="nombre">
+  			<select name = "tipoDeDato">
+				<option value ="byte">byte</option>
+				<option value ="short">short</option>
+				<option value ="int">int</option>
+				<option value ="long">long</option>
+				<option value ="float">float</option>
+				<option value ="double">double</option>
+				<option value ="char">char</option>
+				<option value ="boolean">boolean</option>
+				<option value ="String">String</option>
+  			</select>
+  			<select name = "direccion">
+				<option value ="in">entrada</option>
+				<option value ="out">salida</option>
+				<option value ="inout">entrada y salida</option>				
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

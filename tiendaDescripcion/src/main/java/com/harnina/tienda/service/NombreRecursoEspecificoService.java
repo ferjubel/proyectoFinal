@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.NombreRecursoEspecifico;
-import com.harnina.tienda.model.Recurseable;
 import com.harnina.tienda.repository.NombreRecursoEspecificoRepository;
 
 @Component

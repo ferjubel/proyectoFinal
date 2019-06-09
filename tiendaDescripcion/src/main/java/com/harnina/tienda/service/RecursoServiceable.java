@@ -2,7 +2,6 @@ package com.harnina.tienda.service;
 
 import java.util.List;
 
-import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Recurseable;
 
 public interface RecursoServiceable {

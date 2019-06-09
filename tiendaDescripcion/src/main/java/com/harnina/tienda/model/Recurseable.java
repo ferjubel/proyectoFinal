@@ -8,4 +8,5 @@ public interface Recurseable {
 	void guardar(RecursoService recursoService);
 	void borrar(RecursoService recursoService);
 	String getNombre();
+	void asociarParte(Parteable parte);
 }

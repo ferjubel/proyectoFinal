@@ -1,14 +1,19 @@
 package com.harnina.tienda.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Modulo;
+import com.harnina.tienda.model.SubModulo;
+import com.harnina.tienda.model.RecursoEspecifico;
 import com.harnina.tienda.model.NombreRecursoEspecifico;
 import com.harnina.tienda.model.NombreSubModulo;
+import com.harnina.tienda.model.Parteable;
 import com.harnina.tienda.model.Recurseable;
-import com.harnina.tienda.model.RecursoEspecifico;
-import com.harnina.tienda.model.SubModulo;
 
 @Component
 public class DataService {
@@ -30,11 +35,17 @@ public class DataService {
 	
 	@Autowired
 	private RecursoService recursoService;
+
+	@Autowired
+	private ParteService parteService;
 	
 	public DataService() {
 		super();
 	}
 
+	
+	//MODULO
+	
 	public List<Modulo> getOpcionesModulo() {
 		return this.moduloService.getOpcionesModulo();
 	}
@@ -61,6 +72,7 @@ public class DataService {
 
 	
 	
+	//SUBMODULO
 	
 	public List<SubModulo> getSubModulos(String idModuloActual) {
 		return this.subModuloService.getSubModulos(Long.valueOf(idModuloActual));
@@ -98,6 +110,9 @@ public class DataService {
 
 	
 	
+	
+	//RECURSO ESPECIFICO
+	
 	public List<RecursoEspecifico> getRecursosEspecificos() {
 		return this.recursoEspecificoService.getRecursosEspecificos();
 	}
@@ -130,6 +145,9 @@ public class DataService {
 	
 	
 	
+	
+	//NOMBRE SUBMODULO
+	
 	public List<NombreSubModulo> getNombresSubModulo() {
 		return this.nombreSubModuloService.getNombresSubModulo();
 	}
@@ -152,6 +170,8 @@ public class DataService {
 	
 	
 	
+	
+	//NOMBRE RECURSO ESPECIFICO
 	public List<NombreRecursoEspecifico> getNombresRecursoEspecifico() {
 		return this.nombreRecursoEspecificoService.getNombresRecursoEspecifico();
 	}
@@ -175,6 +195,8 @@ public class DataService {
 	
 	
 
+	
+	//RECURSEABLE
 	public List<Recurseable> getRecursos(String idRecursoEspecifico) {
 		return this.recursoService.getRecursos(Long.valueOf(idRecursoEspecifico));
 	}
@@ -202,8 +224,41 @@ public class DataService {
 	public Recurseable getRecurso(String idRecurso,String idRecursoEspecifico) {
 		return this.recursoService.getRecurso(idRecurso,idRecursoEspecifico);
 	}
+
 	
 	
+	
+	//PARTEABLE 
+	public Set<Parteable> getPartes() {
+		return this.parteService.getPartes();
+	}
+
+	public Parteable getParte(String idParte, String nombreParte) {
+		return this.parteService.getParte(idParte, nombreParte);
+	}
+
+	public void guardarParte(Parteable parte) {
+		parte.guardar(parteService);
+	}
+
+	public boolean existParte(Parteable parte) {
+		return this.parteService.existParte(parte);
+	}
+
+	public void borrarParte(Parteable parte) {
+		this.parteService.borrarParte(parte);
+	}
+	
+	public void asociarParte(Recurseable recurso,Parteable parte){
+		this.parteService.asociarParte(recurso,parte);
+	}
+
+
+	public Map<String,String> getNombrePartes() {
+		Map<String,String> retorno = new HashMap<>();
+		retorno.put("nombre", "parametro");
+		return retorno;
+	}
 	
 
 	/*
