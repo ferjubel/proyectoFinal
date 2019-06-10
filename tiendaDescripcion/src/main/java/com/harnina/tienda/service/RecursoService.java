@@ -64,17 +64,20 @@ public class RecursoService {
 	}
 	
 	public void guardarRecurso(Recurseable recurso) {
-		if(!existRecurso(recurso))recurso.guardar(this);
+		comprobarListas();
+		recurso.guardar(this);
+		recargarRecursos();
 	}
 
 	public void borrarRecurso(Recurseable recurso) {
-		if(!existRecurso(recurso))recurso.borrar(this);
+		recurso.borrar(this);
+		recargarRecursos();
 	}
 	
 	public void guardarRecurso(FuncionProcedureMetodo funcionProcedureMetodo) {
-		if(!existRecurso(funcionProcedureMetodo)){
-			funcionProcedureMetodoService.guardarRecurso(funcionProcedureMetodo);
-		}
+		comprobarListas();
+		funcionProcedureMetodoService.guardarRecurso(funcionProcedureMetodo);
+		recargarRecursos();
 	}
 
 	public Recurseable getRecurso(String idRecurso,String idRecursoEspecifico) {
@@ -86,6 +89,10 @@ public class RecursoService {
 			}
 		}
 		return null;
+	}
+
+	public Recurseable getRecurso(long idRecurso, long idRecursoEspecifico) {
+		return getRecurso(String.valueOf(idRecurso) , String.valueOf(idRecursoEspecifico));
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.harnina.tienda.controllers;
 
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,7 +66,6 @@ public class AdminParteController{
 	
 	@RequestMapping("/adminTools/parte/agregar/parametro/guardar")
 	public String adminToolsParametroAgregarParametroGuardar(Model model,Parametro parametro) {
-		parametro.setFuncionProcedureMetodo(new ArrayList<>());
 		this.dataService.guardarParte(parametro);
 		model.addAttribute("mensaje" ,"parametro guardado");
 		return "adminToolsParte_template";

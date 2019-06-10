@@ -1,7 +1,5 @@
 package com.harnina.tienda.model;
 
-import java.util.List;
-
 import com.harnina.tienda.service.ParteService;
 
 public interface Parteable{
@@ -9,6 +7,5 @@ public interface Parteable{
 	String getNombre();
 	void guardar(ParteService parteService);
 	void borrar(ParteService parteService);
-	List<Recurseable> getRescursos();
-	void asociarParte(Recurseable recurso);
+	void asociarParte(ParteService servicio, FuncionProcedureMetodo recurso);
 }

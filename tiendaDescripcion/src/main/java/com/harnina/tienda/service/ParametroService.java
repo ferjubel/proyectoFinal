@@ -57,6 +57,4 @@ public class ParametroService implements ParteServiceable{
 		retorno.addAll(this.parametros);
 		return retorno;
 	}
-	
-
 }

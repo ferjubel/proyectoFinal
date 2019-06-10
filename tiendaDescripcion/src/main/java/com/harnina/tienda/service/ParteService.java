@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Parametro;
 import com.harnina.tienda.model.Parteable;
 import com.harnina.tienda.model.Recurseable;
@@ -20,6 +20,9 @@ public class ParteService{
 	
 	@Autowired
 	private ParametroService parametroService;
+	
+	@Autowired
+	private RecursoService recursoService;
 	
 	public ParteService() {
 	}
@@ -59,18 +62,28 @@ public class ParteService{
 	}
 	
 	public void guardarParte(Parteable parte) {
-		if(!existParte(parte))parte.guardar(this);
+		comprobarListas();
+		if(!existParte(parte)){
+			parte.guardar(this);
+			recargarPartes();
+		}
 	}
 
 	public void borrarParte(Parteable parte) {
-		if(existParte(parte))parte.borrar(this);
+		if(existParte(parte)){
+			parte.borrar(this);
+			recargarPartes();
+		}
 	}
 	
 	public void guardarParte(Parametro parametro) {
+		comprobarListas();
 		parametroService.guardarParametro(parametro);
+		recargarPartes();
 	}
 
 	public Parteable getParte(String idParte, String nombreParte) {
+		comprobarListas();
 		for (Parteable parte : partes) {
 			if(parte.getIdParte() == Long.valueOf(idParte) && 
 					parte.getNombre().equals(nombreParte)) return parte;
@@ -79,8 +92,15 @@ public class ParteService{
 	}
 
 	public void asociarParte(Recurseable recurso, Parteable parte) {
-		parte.asociarParte(recurso);
+		recurso.asociarParte(this , parte);
 	}
 	
+	public void asociarParte(FuncionProcedureMetodo recurso, Parametro parte) {
+		comprobarListas();
+		FuncionProcedureMetodo recursoTemp = (FuncionProcedureMetodo) this.recursoService.getRecurso(recurso.getIdRecurso(), recurso.getIdRecursoEspecifico());
+		recursoTemp.getParametros().add(parte);
+		recursoService.guardarRecurso(recursoTemp);
+		recargarPartes();
+	}
 
 }

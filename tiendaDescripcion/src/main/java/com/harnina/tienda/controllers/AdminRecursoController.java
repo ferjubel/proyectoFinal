@@ -1,6 +1,6 @@
 package com.harnina.tienda.controllers;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +72,7 @@ public class AdminRecursoController{
 	@RequestMapping("/adminTools/recurso/agregar/guardarFuncionProcedureMetodo")
 	public String adminToolsRecursoAgregarRecursoGuardar(Model model,FuncionProcedureMetodo funcionProcedureMetodo) {
 		funcionProcedureMetodo.setRecursoEspecifico(this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
-		funcionProcedureMetodo.setParametros(new TreeSet<>());
+		funcionProcedureMetodo.setParametros(new ArrayList<>());
 		if(this.dataService.existRecurso(funcionProcedureMetodo)){
 			model.addAttribute("mensaje" ,"El Recurso ya existe");
 		}
@@ -85,7 +85,7 @@ public class AdminRecursoController{
 
 	@RequestMapping("/adminTools/recurso/editar/guardarFuncionProcedureMetodo")
 	public String adminToolsRecursoEditarRecursoGuardar(Model model ,FuncionProcedureMetodo recurso) {
-		recurso.setParametros((TreeSet<Parametro>)((FuncionProcedureMetodo)this.dataService.getRecurso(idRecursoActual, idRecursoEspecificoActual)).getParametros());
+		recurso.setParametros((ArrayList<Parametro>)((FuncionProcedureMetodo)this.dataService.getRecurso(idRecursoActual, idRecursoEspecificoActual)).getParametros());
 		recurso.setRecursoEspecifico(this.dataService.getRecursoEspecifico(String.valueOf(this.dataService.getRecurso(idRecursoActual, idRecursoEspecificoActual).getIdRecursoEspecifico())));
 		this.dataService.guardarRecurso(recurso);
 		model.addAttribute("mensaje" ,"recurso actualizado");
