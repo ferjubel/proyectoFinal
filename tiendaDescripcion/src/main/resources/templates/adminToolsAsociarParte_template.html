@@ -10,7 +10,7 @@
 		<form action="/adminTools/asociarParte/guardar" method="post">
   			<select name = "idRecursoEspecifico">
   			{{#opcionesRecursoEspecifico}}
-				<option value ="{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</option>				
+				<option value ="{{idRecursoEspecifico}}">{{subModulo.nombreSubModulo.nombre}} {{nombreRecursoEspecifico.nombre}}</option>				
 			{{/opcionesRecursoEspecifico}}
   			</select>
   			<select name = "idRecurso">

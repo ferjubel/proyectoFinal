@@ -27,7 +27,7 @@ public class RecursoEspecificoService {
 	}
 	
 	public List<RecursoEspecifico> getRecursosEspecificos(long idSubModulo) {
-		if(this.recursosEspecificos==null)recargarRecursosEspecificos();
+		comprobarLista();
 		List<RecursoEspecifico> retorno = new ArrayList<>();
 		for (RecursoEspecifico recursoEspecifico : this.recursosEspecificos) {
 			if(recursoEspecifico.getSubModulo().getIdSubModulo() == idSubModulo){
@@ -37,10 +37,10 @@ public class RecursoEspecificoService {
 		return retorno;
 	}
 
-	public RecursoEspecifico getRecursoEspecifico(long idSubModulo) {
-		if(this.recursosEspecificos==null)recargarRecursosEspecificos();
+	public RecursoEspecifico getRecursoEspecifico(long idRecursoEspecifico) {
+		comprobarLista();
 		for (RecursoEspecifico recursoEspecifico : this.recursosEspecificos) {
-			if(recursoEspecifico.getSubModulo().getIdSubModulo() == idSubModulo){
+			if(recursoEspecifico.getIdRecursoEspecifico() == idRecursoEspecifico){
 				return recursoEspecifico;
 			}
 		}
@@ -48,9 +48,17 @@ public class RecursoEspecificoService {
 		
 	}
 
+	private void comprobarLista() {
+		if(this.recursosEspecificos==null)recargarRecursosEspecificos();
+	}
+
 	public boolean existRecursoEspecifico(RecursoEspecifico recursoEspecifico) {
-		return !this.recursoEspecificoRepository.findBySubModuloIdSubModulo(recursoEspecifico.getSubModulo().getIdSubModulo()).isEmpty() &&
-				!this.recursoEspecificoRepository.findByNombreRecursoEspecificoIdNombreRecursoEspecifico(recursoEspecifico.getNombreRecursoEspecifico().getIdNombreRecursoEspecifico()).isEmpty();
+		comprobarLista();
+		for (RecursoEspecifico recursoEspecificoTemp : recursosEspecificos) {
+			if(recursoEspecificoTemp.getNombreRecursoEspecifico().equals(recursoEspecifico.getNombreRecursoEspecifico()) &&
+					recursoEspecificoTemp.getSubModulo().equals(recursoEspecifico.getSubModulo())) return true;
+		}
+		return false;
 	}
 
 	public void guardarRecursoEspecifico(RecursoEspecifico recursoEspecifico) {

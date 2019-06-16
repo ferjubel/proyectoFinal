@@ -19,13 +19,22 @@ public class NombreRecursoEspecificoService {
 	}
 
 	public List<NombreRecursoEspecifico> getNombresRecursoEspecifico() {
-		if(this.nombresRecursoEspecifico==null){
-			this.nombresRecursoEspecifico = nombreRecursoEspecificoRepository.findAll();
-		}
+		comprobarLista();
 		return this.nombresRecursoEspecifico;
 	}
 
+	private void comprobarLista() {
+		if(this.nombresRecursoEspecifico==null){
+			recargarLista();
+		}
+	}
+
+	private void recargarLista() {
+		this.nombresRecursoEspecifico = nombreRecursoEspecificoRepository.findAll();
+	}
+
 	public NombreRecursoEspecifico getNombreRecursoEspecifico(long idRecursoEspecifico) {
+		comprobarLista();
 		for (NombreRecursoEspecifico nombreRecursoEspecifico : nombresRecursoEspecifico) {
 			if(nombreRecursoEspecifico.getIdNombreRecursoEspecifico() == idRecursoEspecifico){
 				return nombreRecursoEspecifico;
@@ -35,21 +44,18 @@ public class NombreRecursoEspecificoService {
 	}
 
 	public boolean existNombreRecursoEspecifico(NombreRecursoEspecifico nombreRecursoEspecifico) {
+		comprobarLista();
 		return !this.nombreRecursoEspecificoRepository.findByNombre(nombreRecursoEspecifico.getNombre()).isEmpty();
 	}
 
 	public void guardarNombreRecursoEspecifico(NombreRecursoEspecifico nombreRecursoEspecifico) {
 		this.nombreRecursoEspecificoRepository.save(nombreRecursoEspecifico);
-		recargarNombreRecursoEspecifico();
+		recargarLista();
 	}
 
-	private void recargarNombreRecursoEspecifico() {
-		this.nombresRecursoEspecifico = nombreRecursoEspecificoRepository.findAll();
-	}
-	
 	public void borrarNombreRecursoEspecifico(NombreRecursoEspecifico nombreRecursoEspecifico) {
 		this.nombreRecursoEspecificoRepository.delete(nombreRecursoEspecifico);
-		recargarNombreRecursoEspecifico();
+		recargarLista();
 	}
 
 }
