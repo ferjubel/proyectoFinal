@@ -96,7 +96,7 @@ public class AdminRecursoController{
 	public String adminToolsRecursoAgregarRecursoGuardarTabla(Model model,@RequestParam MultipartFile imagenTabla,
 			@RequestParam String nombre,@RequestParam String descripcion) throws IllegalStateException, IOException {
 		String ruta = ".//src//main//resources//img//" + imagenTabla.getOriginalFilename();
-		this.uploadFileService.saveFile(imagenTabla);
+		this.uploadFileService.saveFile(imagenTabla); 
 		Tabla tabla = new Tabla(nombre,ruta,descripcion, 
 				this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
 		tabla.setRecursoEspecifico(this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
