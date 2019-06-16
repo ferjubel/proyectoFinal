@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import com.harnina.tienda.service.ParteService;
 
 @Entity
-public class Parametro implements Parteable,Comparable<Parteable>{
+public class Columna implements Parteable,Comparable<Parteable>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,16 +15,16 @@ public class Parametro implements Parteable,Comparable<Parteable>{
 	
 	private String nombre;
 	private String tipoDeDato;
-	private String direccion;
+	private String descripcion;
 	
-	public Parametro() {
+	public Columna() {
 		super();
 	}
 	
-	public Parametro(String nombre,String tipoDeDato,String direccion) {
+	public Columna(String nombre,String tipoDeDato,String descripcion) {
 		this.nombre = nombre;
 		this.tipoDeDato = tipoDeDato;
-		this.direccion = direccion;
+		this.descripcion = descripcion;
 	}
 
 	public String getTipoDeDato() {
@@ -35,12 +35,12 @@ public class Parametro implements Parteable,Comparable<Parteable>{
 		this.tipoDeDato = tipoDeDato;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public void setIdParte(long idParte) {
