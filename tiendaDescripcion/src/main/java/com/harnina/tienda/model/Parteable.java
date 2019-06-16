@@ -8,4 +8,5 @@ public interface Parteable{
 	void guardar(ParteService parteService);
 	void borrar(ParteService parteService);
 	void asociarParte(ParteService servicio, FuncionProcedureMetodo recurso);
+	void asociarParte(ParteService servicio, Tabla tabla);
 }

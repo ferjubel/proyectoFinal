@@ -1,19 +1,28 @@
 package com.harnina.tienda.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Parametro;
 import com.harnina.tienda.model.Recurseable;
+import com.harnina.tienda.model.Tabla;
 import com.harnina.tienda.service.DataService;
+import com.harnina.tienda.service.UploadFileService;
 
 @Controller
+@MultipartConfig
 public class AdminRecursoController{
+	
+	@Autowired
+	private UploadFileService uploadFileService;
 	
 	@Autowired
 	private DataService dataService;
@@ -78,6 +87,25 @@ public class AdminRecursoController{
 		}
 		else{
 			this.dataService.guardarRecurso(funcionProcedureMetodo);
+			model.addAttribute("mensaje" ,"Recurso guardado");
+		}
+		return "adminToolsRecurso_template";
+	}
+	
+	@RequestMapping("/adminTools/recurso/agregar/guardarTabla")
+	public String adminToolsRecursoAgregarRecursoGuardarTabla(Model model,@RequestParam MultipartFile imagenTabla,
+			@RequestParam String nombre,@RequestParam String descripcion) throws IllegalStateException, IOException {
+		String ruta = ".//src//main//resources//img//" + imagenTabla.getOriginalFilename();
+		this.uploadFileService.saveFile(imagenTabla); 
+		Tabla tabla = new Tabla(nombre,ruta,descripcion, 
+				this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
+		tabla.setRecursoEspecifico(this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
+		tabla.setColumnas(new ArrayList<>());
+		if(this.dataService.existRecurso(tabla)){
+			model.addAttribute("mensaje" ,"El Recurso ya existe");
+		}
+		else{
+			this.dataService.guardarRecurso(tabla);
 			model.addAttribute("mensaje" ,"Recurso guardado");
 		}
 		return "adminToolsRecurso_template";
