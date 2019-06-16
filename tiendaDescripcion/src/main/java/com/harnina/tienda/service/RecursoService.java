@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Recurseable;
+import com.harnina.tienda.model.Tabla;
 import com.harnina.tienda.model.FuncionProcedureMetodo;
 
 @Component
@@ -16,6 +17,9 @@ public class RecursoService {
 	
 	@Autowired
 	private FuncionProcedureMetodoService funcionProcedureMetodoService;
+	
+	@Autowired
+	private TablaService tablaService;
 	
 	public RecursoService() {
 	}
@@ -53,6 +57,7 @@ public class RecursoService {
 	private void iniciarListaServicios() {
 		this.serviceLists = new ArrayList<>();
 		this.serviceLists.add(funcionProcedureMetodoService);
+		this.serviceLists.add(tablaService);
 	}
 	
 	public boolean existRecurso(Recurseable recurso) {
@@ -71,6 +76,12 @@ public class RecursoService {
 
 	public void borrarRecurso(Recurseable recurso) {
 		recurso.borrar(this);
+		recargarRecursos();
+	}
+	
+	public void guardarRecurso(Tabla tabla) {
+		comprobarListas();
+		tablaService.guardarRecurso(tabla);
 		recargarRecursos();
 	}
 	
