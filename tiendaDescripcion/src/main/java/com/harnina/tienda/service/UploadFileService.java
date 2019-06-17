@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 @Service
 public class UploadFileService {
 
-    private String upload_folder = ".//src//main//resources//img//";
+    private String upload_folder = ".//src//main//resources//static//img//";
 
     public void saveFile(MultipartFile file) throws IOException {
         if(!file.isEmpty()){
