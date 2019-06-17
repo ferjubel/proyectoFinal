@@ -95,7 +95,7 @@ public class AdminRecursoController{
 	@RequestMapping("/adminTools/recurso/agregar/guardarTabla")
 	public String adminToolsRecursoAgregarRecursoGuardarTabla(Model model,@RequestParam MultipartFile imagenTabla,
 			@RequestParam String nombre,@RequestParam String descripcion) throws IllegalStateException, IOException {
-		String ruta = ".//src//main//resources//img//" + imagenTabla.getOriginalFilename();
+		String ruta = "http://localhost:8080/img/" + imagenTabla.getOriginalFilename();
 		this.uploadFileService.saveFile(imagenTabla); 
 		Tabla tabla = new Tabla(nombre,ruta,descripcion, 
 				this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
@@ -140,6 +140,7 @@ public class AdminRecursoController{
 	private String getPlantilla(String nombreRecurso,String accion){
 		if(nombreRecurso.equalsIgnoreCase("funcion") || 
 				nombreRecurso.equalsIgnoreCase("procedure") ||
+				nombreRecurso.equalsIgnoreCase("trigger") ||
 				nombreRecurso.equalsIgnoreCase("metodo")){
 			nombreRecurso = new String("FuncionProcedureMetodo");
 		}

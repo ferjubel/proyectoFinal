@@ -2,6 +2,8 @@ package com.harnina.tienda.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Tabla implements Recurseable{
 	private long idRecurso;
 	private String rutaImagen;
 	private String nombre;
+	@Column(length = 65535, columnDefinition = "text")
 	private String descripcion;
 
 	@OneToOne
