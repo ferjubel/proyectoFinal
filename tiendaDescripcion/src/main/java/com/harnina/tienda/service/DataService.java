@@ -1,10 +1,8 @@
 package com.harnina.tienda.service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Modulo;
@@ -229,7 +227,7 @@ public class DataService {
 	
 	
 	//PARTEABLE 
-	public Set<Parteable> getPartes() {
+	public List<Parteable> getPartes() {
 		return this.parteService.getPartes();
 	}
 
@@ -254,9 +252,10 @@ public class DataService {
 	}
 
 
-	public Map<String,String> getNombrePartes() {
-		Map<String,String> retorno = new HashMap<>();
-		retorno.put("nombre", "parametro");
+	public List<String> getNombrePartes() {
+		List<String> retorno = new ArrayList<>();
+		retorno.add("parametro");
+		retorno.add("columna");
 		return retorno;
 	}
 	

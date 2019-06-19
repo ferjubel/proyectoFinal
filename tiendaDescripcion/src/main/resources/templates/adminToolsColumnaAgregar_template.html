@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ColumnaAgregar</title>
+	</head>
+	<body>
+		<h1>AGREGAR COLUMNA</h1>
+		
+		<form name= "columna" action="/adminTools/parte/agregar/columna/guardar" method="post">
+  			<input type="text" name="nombre" placeholder="nombre">
+  			<select name = "tipoDeDato">
+				<option value ="TINYINT">TINYINT</option>
+				<option value ="SMALLINT">SMALLINT</option>
+				<option value ="MEDIUMINT">MEDIUMINT</option>
+				<option value ="INTEGER">INTEGER</option>
+				<option value ="BIGINT">BIGINT</option>
+				<option value ="DOUBLE">DOUBLE</option>
+				<option value ="FLOAT">FLOAT</option>
+				<option value ="DECIMAL ">DECIMAL</option>
+				<option value ="CHAR">CHAR</option>
+				<option value ="VARCHAR">VARCHAR</option>
+				<option value ="BINARY">BINARY</option>
+				<option value ="VARBINARY">VARBINARY</option>
+				<option value ="TINYBLOB">TINYBLOB</option>
+				<option value ="TINYTEXT">TINYTEXT</option>
+				<option value ="BLOB">BLOB</option>
+				<option value ="TEXT">v</option>
+				<option value ="MEDIUMBLOB">MEDIUMBLOB</option>
+				<option value ="MEDIUMTEXT">MEDIUMTEXT</option>
+				<option value ="LONGBLOB">LONGBLOB</option>
+				<option value ="LONGTEX">LONGTEX</option>
+				<option value ="ENUM">ENUM</option>
+				<option value ="SET">SET</option>
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

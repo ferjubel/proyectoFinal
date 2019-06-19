@@ -2,14 +2,14 @@ package com.harnina.tienda.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.harnina.tienda.model.Columna;
 import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Parametro;
 import com.harnina.tienda.model.Parteable;
 import com.harnina.tienda.model.Recurseable;
+import com.harnina.tienda.model.Tabla;
 
 @Component
 public class ParteService{
@@ -22,14 +22,17 @@ public class ParteService{
 	private ParametroService parametroService;
 	
 	@Autowired
+	private ColumnaService columnaService;
+	
+	@Autowired
 	private RecursoService recursoService;
 	
 	public ParteService() {
 	}
 	
-	public Set<Parteable> getPartes() {
+	public List<Parteable> getPartes() {
 		comprobarListas();
-		Set<Parteable> retorno = new TreeSet<>();
+		List<Parteable> retorno = new ArrayList<>();
 		for (ParteServiceable servicioParte : serviceLists) {
 			retorno.addAll(servicioParte.getPartes());
 		}
@@ -51,6 +54,7 @@ public class ParteService{
 	private void iniciarListaServicios() {
 		this.serviceLists = new ArrayList<>();
 		this.serviceLists.add(parametroService);
+		this.serviceLists.add(columnaService);
 	}
 	
 	public boolean existParte(Parteable parte) {
@@ -81,6 +85,12 @@ public class ParteService{
 		parametroService.guardarParametro(parametro);
 		recargarPartes();
 	}
+	
+	public void guardarParte(Columna columna) {
+		comprobarListas();
+		columnaService.guardarColumna(columna);
+		recargarPartes();
+	}
 
 	public Parteable getParte(String idParte, String nombreParte) {
 		comprobarListas();
@@ -100,6 +110,14 @@ public class ParteService{
 		FuncionProcedureMetodo recursoTemp = (FuncionProcedureMetodo) this.recursoService.getRecurso(recurso.getIdRecurso(), recurso.getIdRecursoEspecifico());
 		recursoTemp.getParametros().add(parte);
 		recursoService.guardarRecurso(recursoTemp);
+		recargarPartes();
+	}
+	
+	public void asociarParte(Tabla recurso, Columna parte) {
+		comprobarListas();
+		Tabla tablaTemp = (Tabla) this.recursoService.getRecurso(recurso.getIdRecurso(), recurso.getIdRecursoEspecifico());
+		tablaTemp.getColumnas().add(parte);
+		recursoService.guardarRecurso(tablaTemp);
 		recargarPartes();
 	}
 

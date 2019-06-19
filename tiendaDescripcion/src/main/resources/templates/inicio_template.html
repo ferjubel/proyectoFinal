@@ -51,7 +51,7 @@
     			 <img alt="imagen" src="{{rutaImagen}}">
     		  {{/rutaImagen}}
     		  {{#parametros}} 
-    		  	 <h2>nombre</h2>
+    		  	 <h2>nombre parametro</h2>
     		  	 {{nombre}}
     			 {{#tipoDeDato}} 
 	    		  	 <h2>tipo</h2>
@@ -63,16 +63,12 @@
     		  	 {{/direccion}}
     		  {{/parametros}}
     		  {{#columnas}} 
-    		  	 <h2>nombre</h2>
+    		  	 <h2>nombre columna</h2>
     		  	 {{nombre}}
     			 {{#tipoDeDato}} 
 	    		  	 <h2>tipo</h2>
 	    			 {{tipoDeDato}}
     		  	 {{/tipoDeDato}}
-    		  	 {{#descripcion}} 
-	    		  	 <h2>descripcion</h2>
-	    			 {{descripcion}}
-    		  	 {{/descripcion}}
     		  {{/columnas}}
     		  
 	{{/detallesRecurso}}
