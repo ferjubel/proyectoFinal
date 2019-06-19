@@ -18,9 +18,17 @@
 				<option value ="{{idRecurso}}">{{nombre}}</option>				
 			{{/opcionesRecurso}}
   			</select>
+  			<select name = "tipoParte">
+  			{{#tiposParte}}
+				<option value ="{{.}}">{{.}}</option>				
+			{{/tiposParte}}
+  			</select>
   			<select name = "idParte">
   			{{#opcionesParte}}
-				<option value ="{{idParte}},{{nombre}}">{{tipoDeDato}}{{nombre}}</option>
+				<option value ="{{idParte}},{{nombre}}">
+				{{#tipoDeDato}}{{tipoDeDato}}{{/tipoDeDato}}
+				{{#tipoDeClave}}{{tipoDeClave}}{{/tipoDeClave}}
+				{{nombre}}</option>
 			{{/opcionesParte}}
   			</select>
 	  		<input type='submit' value='Guardar'/>

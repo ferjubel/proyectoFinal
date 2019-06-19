@@ -2,9 +2,9 @@ package com.harnina.tienda.service;
 
 import com.harnina.tienda.model.Parteable;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ParteServiceable {
-	Set<Parteable> getPartes();
+	List<Parteable> getPartes();
 
 }

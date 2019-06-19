@@ -58,6 +58,7 @@ public class AdminController {
 		model.addAttribute("opcionesRecursoEspecifico", this.dataService.getRecursosEspecificos());
 		model.addAttribute("opcionesRecurso", this.dataService.getRecursos());
 		model.addAttribute("opcionesParte", this.dataService.getPartes());
+		model.addAttribute("tiposParte", this.dataService.getNombrePartes());
 		return "adminToolsAsociarParte_template";
 	}
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ClaveAgregar</title>
+	</head>
+	<body>
+		<h1>AGREGAR CLAVE</h1>
+		
+		<form name= "clave" action="/adminTools/parte/agregar/clave/guardar" method="post">
+  			<input type="text" name="nombre" placeholder="nombre">
+  			<select name = "tipoDeClave">
+				<option value ="Primary">Primaria</option>
+				<option value ="Forein">Forein</option>
+				<option value ="Unica">Unica</option>
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

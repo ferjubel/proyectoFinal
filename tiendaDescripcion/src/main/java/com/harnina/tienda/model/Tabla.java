@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.harnina.tienda.service.ParteService;
 import com.harnina.tienda.service.RecursoService;
 
@@ -30,6 +34,10 @@ public class Tabla implements Recurseable{
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	 private List<Columna> columnas;
+	
+	@ManyToMany()
+	@LazyCollection(LazyCollectionOption.FALSE)
+	 private List<Clave> claves;
 
 	public Tabla() {}
 	
@@ -99,6 +107,14 @@ public class Tabla implements Recurseable{
 
 	public void setRecursoEspecifico(RecursoEspecifico recursoEspecifico) {
 		this.recursoEspecifico = recursoEspecifico;
+	}
+	
+	public List<Clave> getClaves() {
+		return claves;
+	}
+
+	public void setClaves(List<Clave> claves) {
+		this.claves = claves;
 	}
 
 	@Override
