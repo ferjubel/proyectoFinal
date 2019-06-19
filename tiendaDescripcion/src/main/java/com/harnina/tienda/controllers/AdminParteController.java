@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.harnina.tienda.model.Columna;
 import com.harnina.tienda.model.Parametro;
 import com.harnina.tienda.model.Parteable;
 import com.harnina.tienda.model.Recurseable;
@@ -75,6 +77,13 @@ public class AdminParteController{
 	public String adminToolsParteEditarParteGuardar(Model model ,Parametro parametro) {
 		this.dataService.guardarParte(parametro);
 		model.addAttribute("mensaje" ,"parametro modificado");
+		return "adminToolsParte_template";
+	}
+	
+	@RequestMapping("/adminTools/parte/agregar/columna/guardar")
+	public String adminToolsParametroAgregarColumnaGuardar(Model model,Columna columna) {
+		this.dataService.guardarParte(columna);
+		model.addAttribute("mensaje" ,"columna guardada");
 		return "adminToolsParte_template";
 	}
 	

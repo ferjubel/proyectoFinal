@@ -15,7 +15,6 @@ public class Columna implements Parteable,Comparable<Parteable>{
 	
 	private String nombre;
 	private String tipoDeDato;
-	private String descripcion;
 	
 	public Columna() {
 		super();
@@ -24,7 +23,6 @@ public class Columna implements Parteable,Comparable<Parteable>{
 	public Columna(String nombre,String tipoDeDato,String descripcion) {
 		this.nombre = nombre;
 		this.tipoDeDato = tipoDeDato;
-		this.descripcion = descripcion;
 	}
 
 	public String getTipoDeDato() {
@@ -33,14 +31,6 @@ public class Columna implements Parteable,Comparable<Parteable>{
 
 	public void setTipoDeDato(String tipoDeDato) {
 		this.tipoDeDato = tipoDeDato;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 
 	public void setIdParte(long idParte) {
