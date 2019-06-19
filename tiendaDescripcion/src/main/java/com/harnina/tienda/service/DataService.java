@@ -2,7 +2,6 @@ package com.harnina.tienda.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Modulo;
@@ -231,8 +230,8 @@ public class DataService {
 		return this.parteService.getPartes();
 	}
 
-	public Parteable getParte(String idParte, String nombreParte) {
-		return this.parteService.getParte(idParte, nombreParte);
+	public Parteable getParte(String idParte, String nombreParte, String tipoParte) {
+		return this.parteService.getParte(idParte, nombreParte,tipoParte);
 	}
 
 	public void guardarParte(Parteable parte) {
@@ -256,6 +255,7 @@ public class DataService {
 		List<String> retorno = new ArrayList<>();
 		retorno.add("parametro");
 		retorno.add("columna");
+		retorno.add("clave");
 		return retorno;
 	}
 	

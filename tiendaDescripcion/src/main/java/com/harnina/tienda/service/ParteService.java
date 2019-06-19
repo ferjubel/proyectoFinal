@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.harnina.tienda.model.Clave;
 import com.harnina.tienda.model.Columna;
 import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Parametro;
@@ -26,6 +28,9 @@ public class ParteService{
 	
 	@Autowired
 	private RecursoService recursoService;
+
+	@Autowired
+	private ClaveService claveService;
 	
 	public ParteService() {
 	}
@@ -55,6 +60,7 @@ public class ParteService{
 		this.serviceLists = new ArrayList<>();
 		this.serviceLists.add(parametroService);
 		this.serviceLists.add(columnaService);
+		this.serviceLists.add(claveService);
 	}
 	
 	public boolean existParte(Parteable parte) {
@@ -91,12 +97,19 @@ public class ParteService{
 		columnaService.guardarColumna(columna);
 		recargarPartes();
 	}
+	
+	public void guardarParte(Clave clave) {
+		comprobarListas();
+		claveService.guardarClave(clave);
+		recargarPartes();
+	}
 
-	public Parteable getParte(String idParte, String nombreParte) {
+	public Parteable getParte(String idParte, String nombreParte,String tipoParte) {
 		comprobarListas();
 		for (Parteable parte : partes) {
 			if(parte.getIdParte() == Long.valueOf(idParte) && 
-					parte.getNombre().equals(nombreParte)) return parte;
+					parte.getNombre().equals(nombreParte) && 
+					parte.getClass().getSimpleName().equalsIgnoreCase(tipoParte)) return parte;
 		}
 		return null;
 	}
@@ -117,6 +130,14 @@ public class ParteService{
 		comprobarListas();
 		Tabla tablaTemp = (Tabla) this.recursoService.getRecurso(recurso.getIdRecurso(), recurso.getIdRecursoEspecifico());
 		tablaTemp.getColumnas().add(parte);
+		recursoService.guardarRecurso(tablaTemp);
+		recargarPartes();
+	}
+	
+	public void asociarParte(Tabla recurso, Clave parte) {
+		comprobarListas();
+		Tabla tablaTemp = (Tabla) this.recursoService.getRecurso(recurso.getIdRecurso(), recurso.getIdRecursoEspecifico());
+		tablaTemp.getClaves().add(parte);
 		recursoService.guardarRecurso(tablaTemp);
 		recargarPartes();
 	}

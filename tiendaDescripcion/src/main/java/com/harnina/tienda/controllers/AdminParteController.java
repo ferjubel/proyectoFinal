@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.harnina.tienda.model.Clave;
 import com.harnina.tienda.model.Columna;
 import com.harnina.tienda.model.Parametro;
 import com.harnina.tienda.model.Parteable;
@@ -51,17 +52,17 @@ public class AdminParteController{
 	
 	@RequestMapping("/adminTools/parte/editar/{tipoParte}")
 	public String adminToolsModuloEditarModulo(Model model,
-		@RequestParam String idParte,@RequestParam String nombreParte) {
+		@RequestParam String idParte,@RequestParam String nombreParte,@RequestParam String idRecurso) {
 		
-		model.addAttribute("parte", this.dataService.getParte(idParte,nombreParte));
+		model.addAttribute("parte", this.dataService.getParte(idParte,idRecurso,nombreParte));
 		this.idParteActual = idParte;
-		return getPlantilla(this.dataService.getParte(idParte,nombreParte).getNombre(),"Editar");
+		return getPlantilla(this.dataService.getParte(idParte,idRecurso,nombreParte).getNombre(),"Editar");
 	}
 	
 	@RequestMapping("/adminTools/parte/borrar/{tipoParte}")
 	public String adminToolsParteBorrarParte(Model model,
-			@RequestParam String idParte,@RequestParam String nombreParte) {
-		model.addAttribute("parte", this.dataService.getParte(idParte,nombreParte));
+			@RequestParam String idParte,@RequestParam String nombreParte,@RequestParam String idRecurso) {
+		model.addAttribute("parte", this.dataService.getParte(idParte,idRecurso,nombreParte));
 		this.idParteActual = idParte;
 		return "adminToolsParteBorrar_template";
 	}
@@ -87,9 +88,16 @@ public class AdminParteController{
 		return "adminToolsParte_template";
 	}
 	
+	@RequestMapping("/adminTools/parte/agregar/clave/guardar")
+	public String adminToolsParametroAgregarClaveGuardar(Model model,Clave clave) {
+		this.dataService.guardarParte(clave);
+		model.addAttribute("mensaje" ,"clave guardada");
+		return "adminToolsParte_template";
+	}
+	
 	@RequestMapping("/adminTools/parte/borrar/guardar")
-	public String adminToolsParteBorrarParteGuardar(Model model) {
-		Parteable parte = this.dataService.getParte(this.idParteActual,this.nombreParteActual);
+	public String adminToolsParteBorrarParteGuardar(Model model,@RequestParam String idRecurso) {
+		Parteable parte = this.dataService.getParte(this.idParteActual,idRecurso,this.nombreParteActual);
 		if(!this.dataService.existParte(parte)){
 			model.addAttribute("mensaje" ,"No borrado. La parte no existe");
 		}
@@ -107,9 +115,11 @@ public class AdminParteController{
 	
 	@RequestMapping("/adminTools/asociarParte/guardar")
 	public String adminToolsAsociarParteGuardar(Model model,@RequestParam String idParte,@RequestParam String idRecurso,
-			@RequestParam String idRecursoEspecifico) {
+			@RequestParam String idRecursoEspecifico,@RequestParam String tipoParte) {
 		Recurseable recurso = dataService.getRecurso(idRecurso, idRecursoEspecifico);
-		Parteable parteable = dataService.getParte(idParte.substring(0,idParte.indexOf(',')), idParte.substring(idParte.indexOf(',')+1));
+		String idParteId = idParte.substring(0,idParte.indexOf(','));
+		String nombreParteNombre = idParte.substring(idParte.indexOf(',')+1);
+		Parteable parteable = dataService.getParte(idParteId,nombreParteNombre,tipoParte);
 		dataService.asociarParte(recurso, parteable);
 		model.addAttribute("mensaje" ,"parte asociada");
 		return "adminToolsParte_template";

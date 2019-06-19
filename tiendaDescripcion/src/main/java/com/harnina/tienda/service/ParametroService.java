@@ -1,8 +1,7 @@
 package com.harnina.tienda.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Parametro;
@@ -22,6 +21,7 @@ public class ParametroService implements ParteServiceable{
 	}
 
 	public Parametro getParametro(long idParte) {
+		comprobarLista();
 		for (Parametro parametro : parametros) {
 			if(parametro.getIdParte() == idParte){
 				return parametro;
@@ -31,10 +31,12 @@ public class ParametroService implements ParteServiceable{
 	}
 
 	public boolean existParametro(Parametro parametro) {
+		comprobarLista();
 		return !this.parametroRepository.findByNombre(parametro.getNombre()).isEmpty();
 	}
 
 	public void guardarParametro(Parametro parametro) {
+		comprobarLista();
 		this.parametroRepository.save(parametro);
 		recargarParametro();
 	}
@@ -44,16 +46,19 @@ public class ParametroService implements ParteServiceable{
 	}
 	
 	public void borrarParametro(Parametro parametro) {
+		comprobarLista();
 		this.parametroRepository.delete(parametro);
 		recargarParametro();
 	}
 
+	private void comprobarLista() {
+		if(this.parametros == null)recargarParametro();
+	}
+
 	@Override
-	public Set<Parteable> getPartes() {
-		if(this.parametros==null){
-			recargarParametro();
-		}
-		Set<Parteable> retorno = new TreeSet<>();
+	public List<Parteable> getPartes() {
+		comprobarLista();
+		List<Parteable> retorno = new ArrayList<>();
 		retorno.addAll(this.parametros);
 		return retorno;
 	}

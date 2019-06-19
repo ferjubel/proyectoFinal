@@ -1,8 +1,7 @@
 package com.harnina.tienda.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Columna;
@@ -13,48 +12,56 @@ import com.harnina.tienda.repository.ColumnaRepository;
 public class ColumnaService implements ParteServiceable{
 	
 	@Autowired
-	private ColumnaRepository parametroRepository;
+	private ColumnaRepository columnaRepository;
 	
-	private List<Columna> parametros;
+	private List<Columna> columnas;
 
 	public ColumnaService() {
 		super();
 	}
 
 	public Columna getColumna(long idParte) {
-		for (Columna parametro : parametros) {
-			if(parametro.getIdParte() == idParte){
-				return parametro;
+		comprobarLista();
+		for (Columna columna : columnas) {
+			if(columna.getIdParte() == idParte){
+				return columna;
 			}
 		}
 		return null;
 	}
 
-	public boolean existColumna(Columna parametro) {
-		return !this.parametroRepository.findByNombre(parametro.getNombre()).isEmpty();
+	public boolean existColumna(Columna columna) {
+		comprobarLista();
+		return !this.columnaRepository.findByNombre(columna.getNombre()).isEmpty();
 	}
 
-	public void guardarColumna(Columna parametro) {
-		this.parametroRepository.save(parametro);
+	public void guardarColumna(Columna columna) {
+		comprobarLista();
+		this.columnaRepository.save(columna);
 		recargarColumna();
 	}
 
 	private void recargarColumna() {
-		this.parametros = parametroRepository.findAll();
+		this.columnas = columnaRepository.findAll();
 	}
 	
-	public void borrarColumna(Columna parametro) {
-		this.parametroRepository.delete(parametro);
+	public void borrarColumna(Columna columna) {
+		comprobarLista();
+		this.columnaRepository.delete(columna);
 		recargarColumna();
 	}
 
 	@Override
-	public Set<Parteable> getPartes() {
-		if(this.parametros==null){
+	public List<Parteable> getPartes() {
+		comprobarLista();
+		List<Parteable> retorno = new ArrayList<>();
+		retorno.addAll(this.columnas);
+		return retorno;
+	}
+
+	private void comprobarLista() {
+		if(this.columnas==null){
 			recargarColumna();
 		}
-		Set<Parteable> retorno = new TreeSet<>();
-		retorno.addAll(this.parametros);
-		return retorno;
 	}
 }
