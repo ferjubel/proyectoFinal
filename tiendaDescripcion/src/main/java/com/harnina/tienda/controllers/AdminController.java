@@ -61,4 +61,16 @@ public class AdminController {
 		model.addAttribute("tiposParte", this.dataService.getNombrePartes());
 		return "adminToolsAsociarParte_template";
 	}
+	
+	@RequestMapping("/adminTools/diagrama")
+	public String adminToolsDiagrama(Model model) {
+		return "adminToolsDiagrama_template";
+	}
+	
+	@RequestMapping("/adminTools/diagrama/asociar")
+	public String adminToolsDiagramaAsociar(Model model) {
+		model.addAttribute("opcionesSubModulo", this.dataService.getSubModulos());
+		model.addAttribute("opcionesDiagrama", this.dataService.getDiagramas());
+		return "adminToolsAsociarDiagrama_template";
+	}
 }

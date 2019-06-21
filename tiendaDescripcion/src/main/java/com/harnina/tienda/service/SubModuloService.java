@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.harnina.tienda.model.Diagrama;
 import com.harnina.tienda.model.SubModulo;
 import com.harnina.tienda.repository.SubModuloRepository;
 
@@ -63,8 +65,20 @@ public class SubModuloService {
 		recargarSubModulo();
 	}
 
-	
+	public List<Diagrama> getDiagramas (String idSubModulo) {
+		return getSubModulo(Long.valueOf(idSubModulo)).getDiagrama();
+	}
 
+	public void asociarDiagrama(Diagrama diagrama, String idSubModulo) {
+		SubModulo subModulo = getSubModulo(idSubModulo);
+		subModulo.getDiagrama().add(diagrama);
+		guardarSubModulo(subModulo);
+	}
+
+	private SubModulo getSubModulo(String idSubModulo) {
+		return getSubModulo(Long.valueOf(idSubModulo));
+	}
+	
 	
 
 	
