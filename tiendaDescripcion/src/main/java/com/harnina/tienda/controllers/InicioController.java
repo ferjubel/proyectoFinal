@@ -52,6 +52,7 @@ public class InicioController {
 			model.addAttribute("hasSubModulos", true );
 			model.addAttribute("hasRecursosEspecificos", true );
 			model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
+			model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModulo));
 		}
 		return "inicio_template";
 	}
@@ -63,6 +64,7 @@ public class InicioController {
 		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
+		model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModuloActual));
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
 		if(this.dataService.getRecursos(idRecursoEspecifico).size()>0){
 			model.addAttribute("hasRecursos", true );
@@ -77,6 +79,7 @@ public class InicioController {
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("hasSubModulos", true );
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
+		model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModuloActual));
 		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
 		model.addAttribute("hasRecursos", true );

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>adminAsociarDiagrama</title>
+	</head>
+	<body>
+		<h1>ASOCIAR DIAGRAMA A SUBMODULO</h1>
+		
+		<form action="/adminTools/diagrama/asociar/guardar" method="post">
+  			<select name = "idSubModulo">
+  			{{#opcionesSubModulo}}
+				<option value ="{{idSubModulo}}">{{nombreSubModulo.nombre}}</option>				
+			{{/opcionesSubModulo}}
+  			</select>
+  			<select name = "idDiagrama">
+  			{{#opcionesDiagrama}}
+				<option value ="{{idDiagrama}}">{{nombre}}</option>				
+			{{/opcionesDiagrama}}
+  			</select>
+	  		<input type='submit' value='Guardar'/>
+		</form>
+		
+	</body>
+</html>

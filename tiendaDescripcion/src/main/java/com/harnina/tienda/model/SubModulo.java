@@ -1,10 +1,14 @@
 package com.harnina.tienda.model;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class SubModulo {
@@ -18,6 +22,10 @@ public class SubModulo {
 	
 	@OneToOne()
 	private NombreSubModulo nombreSubModulo;
+	
+	@ManyToMany()
+	@LazyCollection(LazyCollectionOption.FALSE)
+	 private List<Diagrama> diagrama;
 	
 	public SubModulo() {}
 	
@@ -52,6 +60,14 @@ public class SubModulo {
 
 	public void setModulo(Modulo modulo) {
 		this.modulo = modulo;
+	}
+
+	public List<Diagrama> getDiagrama() {
+		return diagrama;
+	}
+
+	public void setDiagrama(List<Diagrama> diagrama) {
+		this.diagrama = diagrama;
 	}
 
 	

@@ -17,9 +17,14 @@
 	{{#hasSubModulos}}
 		<h1>SUB MODULOS</h1>
 	{{/hasSubModulos}}
+	
 	{{#subModulos}}
 		<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a>
 	{{/subModulos}}
+	
+	{{#diagramas}}
+		<img src = "{{rutaDiagrama}}">
+	{{/diagramas}}
 	
 	{{#hasRecursosEspecificos}}
 		<h1>RECURSOS ESPECIFICOS</h1>

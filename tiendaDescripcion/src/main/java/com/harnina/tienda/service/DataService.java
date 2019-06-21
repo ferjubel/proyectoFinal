@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.harnina.tienda.model.Diagrama;
 import com.harnina.tienda.model.Modulo;
 import com.harnina.tienda.model.SubModulo;
 import com.harnina.tienda.model.RecursoEspecifico;
@@ -20,6 +21,9 @@ public class DataService {
 	
 	@Autowired
 	private SubModuloService subModuloService;
+	
+	@Autowired
+	private DiagramaService diagramaService;
 	
 	@Autowired
 	private NombreSubModuloService nombreSubModuloService;
@@ -105,8 +109,9 @@ public class DataService {
 		this.subModuloService.borrarSubModulo(subModulo);
 	}
 
-	
-	
+	public List<Diagrama> getDiagramas (String idSubModulo) {
+		return subModuloService.getDiagramas(idSubModulo);
+	}
 	
 	//RECURSO ESPECIFICO
 	
@@ -250,7 +255,6 @@ public class DataService {
 		this.parteService.asociarParte(recurso,parte);
 	}
 
-
 	public List<String> getNombrePartes() {
 		List<String> retorno = new ArrayList<>();
 		retorno.add("parametro");
@@ -258,46 +262,27 @@ public class DataService {
 		retorno.add("clave");
 		return retorno;
 	}
+
+	
 	
 
-	/*
-	@PostConstruct
-	public void init() {
-		moduloRepository.save(new Modulo("base de datos"));
-		moduloRepository.save(new Modulo("cliente"));
-		moduloRepository.save(new Modulo("servidor"));
-		
-		nombreSubModuloRepository.save(new NombreSubModulo("pagina"));
-		nombreSubModuloRepository.save(new NombreSubModulo("cliente"));
-		
-		subModuloRepository.save(new SubModulo(moduloRepository.findOne((long) 1), nombreSubModuloRepository.findOne((long) 1)));
-		subModuloRepository.save(new SubModulo(moduloRepository.findOne((long) 1), nombreSubModuloRepository.findOne((long) 2)));
 	
-		nombreRecursoEspecificoRepository.save(new NombreRecursoEspecifico("procudure"));
-		nombreRecursoEspecificoRepository.save(new NombreRecursoEspecifico("funciones"));
-		nombreRecursoEspecificoRepository.save(new NombreRecursoEspecifico("tablas"));
-		nombreRecursoEspecificoRepository.save(new NombreRecursoEspecifico("vistas"));
-		nombreRecursoEspecificoRepository.save(new NombreRecursoEspecifico("modelo relacional"));
-		
-		recursoEspecificoRepository.save(new RecursoEspecifico("getBody", "BEGIN"+
-			    "\t\tEND,",
-				"TODO EXPLICAR PROCEDURE", subModuloRepository.findOne((long) 1), nombreRecursoEspecificoRepository.findOne((long) 1)));
-		
-		
-		
-		
-		recursoEspecificoRepository.save(new RecursoEspecifico("getLogin", "Begin etc etc etc ect",
-				"hace magia y devuelve el body", subModuloRepository.findOne((long) 1), nombreRecursoEspecificoRepository.findOne((long) 1)));
-		
-		recursoEspecificoRepository.save(new RecursoEspecifico("getNif", "Begin etc etc etc ect",
-				"hace magia y devuelve el body", subModuloRepository.findOne((long) 1), nombreRecursoEspecificoRepository.findOne((long) 1)));
-		
-		recursoEspecificoRepository.save(new RecursoEspecifico("getCodigoPostal", "Begin etc etc etc ect",
-				"hace magia y devuelve el body", subModuloRepository.findOne((long) 1), nombreRecursoEspecificoRepository.findOne((long) 1)));
-		
-		recursoEspecificoRepository.save(new RecursoEspecifico("getPersonalData", "Begin etc etc etc ect",
-				"hace magia y devuelve el body", subModuloRepository.findOne((long) 1), nombreRecursoEspecificoRepository.findOne((long) 1)));
+	//DIAGRAMAS
+
+	public boolean guardarDiagrama(Diagrama diagrama) {
+		return diagramaService.guardarDiagrama(diagrama);
 	}
-*/
+	
+	public boolean borrarDiagrama(Diagrama diagrama) {
+		return diagramaService.borrarDiagrama(diagrama);
+	}
+
+	public List<Diagrama> getDiagramas() {
+		return diagramaService.getDiagramas();
+	}
+
+	public void asociarDiagrama(String idDiagrama, String idSubModulo) {
+		this.subModuloService.asociarDiagrama(this.diagramaService.getDiagrama(idDiagrama),idSubModulo);
+	}
 
 }
