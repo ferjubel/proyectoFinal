@@ -285,4 +285,16 @@ public class DataService {
 		this.subModuloService.asociarDiagrama(this.diagramaService.getDiagrama(idDiagrama),idSubModulo);
 	}
 
+	public boolean hasParametros(String idRecurso, String idRecursoEspecifico) {
+		return getRecurso(idRecurso, idRecursoEspecifico).has("Parametro");
+	}
+
+	public boolean hasColumnas(String idRecurso, String idRecursoEspecifico) {
+		return getRecurso(idRecurso, idRecursoEspecifico).has("Columna");
+	}
+
+	public boolean hasClaves(String idRecurso, String idRecursoEspecifico) {
+		return getRecurso(idRecurso, idRecursoEspecifico).has("Clave");
+	}
+
 }

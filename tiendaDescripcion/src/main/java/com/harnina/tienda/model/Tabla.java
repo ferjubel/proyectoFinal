@@ -145,4 +145,9 @@ public class Tabla implements Recurseable{
 	public void asociarParte(ParteService servicio,Parteable parte){
 		parte.asociarParte(servicio, this);
 	}
+
+	@Override
+	public boolean has(String nombre) {
+		return (nombre == "Clave" || nombre == "Columna") && !this.getNombre().contains("Vista");
+	}
 }
