@@ -1,6 +1,8 @@
 package com.harnina.tienda.model;
 
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,9 @@ public class SubModulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idSubModulo;
+	
+	@Column(length = 65535, columnDefinition = "text")
+	private String descripcion;
 
 	@OneToOne()
 	private Modulo modulo;
@@ -29,14 +34,16 @@ public class SubModulo {
 	
 	public SubModulo() {}
 	
-	public SubModulo(Modulo modulo, NombreSubModulo nombreSubModulo) {
+	public SubModulo(Modulo modulo, NombreSubModulo nombreSubModulo,String descripcion) {
 		this.modulo = modulo;
 		this.nombreSubModulo = nombreSubModulo;
+		this.descripcion = descripcion;
 	}
 
-	public SubModulo(NombreSubModulo nombreSubModulo,Modulo modulo) {
+	public SubModulo(NombreSubModulo nombreSubModulo,Modulo modulo,String descripcion) {
 		this.nombreSubModulo = nombreSubModulo;
 		this.modulo = modulo;
+		this.descripcion = descripcion;
 	}
 
 	public long getIdSubModulo() {

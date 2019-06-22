@@ -46,8 +46,8 @@ public class AdminSubModuloController{
 	
 	@RequestMapping("/adminTools/subModulo/agregar/guardar")
 	public String adminToolsSubModuloAgregarSubModuloGuardar(Model model,@RequestParam String idNombreSubModulo,
-			@RequestParam String idModulo) {
-		SubModulo subModulo = new SubModulo(dataService.getNombreSubModulo(idNombreSubModulo),dataService.getModulo(idModulo));
+			@RequestParam String idModulo, @RequestParam String descripcion) {
+		SubModulo subModulo = new SubModulo(dataService.getNombreSubModulo(idNombreSubModulo),dataService.getModulo(idModulo),descripcion);
 		if(this.dataService.existSubModulo(subModulo)){
 			model.addAttribute("mensaje" ,"El SubModulo ya existe");
 		}

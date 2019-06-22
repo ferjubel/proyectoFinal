@@ -3,92 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <title>FinCiclo</title>
+<link rel="stylesheet" href="http://localhost:8080/css/style.css"></link>
 </head>
 <body>
+
 {{#bienvenida}}
-	<h1>Bienvenido</h1>
-	{{/bienvenida}}
+	<h4>Bienvenido</h4>
+{{/bienvenida}}
+
+<div class="contenedorPrincipal">
+	<div class="menuLateralIzquierdo">
 	
-	<h1>MODULOS</h1>
-	{{#opcionesModulo}}
-		<a href="/opcion/{{idModulo}}">{{nombre}}</a>
-	{{/opcionesModulo}}
-	
+		<div class="row">
+		  <div class="col">
+		    <div class="tabs">
+		      <div class="tab">
+		        <input type="checkbox" id="chck1">
+		        <label class="tabLabel" for="chck1">
+		       		{{#moduloActual}}
+				    	{{nombre}}
+				    {{/moduloActual}}
+				    {{^moduloActual}}
+		 				Modulo
+					{{/moduloActual}}
+				</label>
+		         {{#opcionesModulo}}
+		       		 <div class="tabContent">
+						<a href="/opcion/{{idModulo}}">{{nombre}}</a>
+			        </div>
+				{{/opcionesModulo}}
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 	{{#hasSubModulos}}
-		<h1>SUB MODULOS</h1>
+		<div class="row">
+		  <div class="col">
+		    <div class="tabs">
+		      <div class="tab">
+		        <input type="checkbox" id="chck2">
+		        <label class="tabLabel" for="chck2">
+		       		{{#subModuloActual}}
+				    	{{nombreSubModulo.nombre}}
+				    {{/subModuloActual}}
+				    {{^subModuloActual}}
+		 				SubModulo
+					{{/subModuloActual}}
+				</label>
+		         {{#subModulos}}
+		       		 <div class="tabContent">
+						<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a>
+			        </div>
+				{{/subModulos}}
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	{{/hasSubModulos}}
 	
-	{{#subModulos}}
-		<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a>
-	{{/subModulos}}
-	
-	{{#diagramas}}
-		<img src = "{{rutaDiagrama}}">
-	{{/diagramas}}
-	
 	{{#hasRecursosEspecificos}}
-		<h1>RECURSOS ESPECIFICOS</h1>
+		<div class="row">
+		  <div class="col">
+		    <div class="tabs">
+		      <div class="tab">
+		        <input type="checkbox" id="chck3">
+		        <label class="tabLabel" for="chck3">
+		       		{{#recursoEspecificoActual}}
+				    	{{nombreRecursoEspecifico.nombre}}
+				    {{/recursoEspecificoActual}}
+				    {{^recursoEspecificoActual}}
+		 				RecursoEspecifico
+					{{/recursoEspecificoActual}}
+				</label>
+		         {{#recursosEspecificos}}
+		       		 <div class="tabContent">
+						<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a>
+			        </div>
+				{{/recursosEspecificos}}
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	{{/hasRecursosEspecificos}}
-	{{#recursosEspecificos}}
-		<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a>
-	{{/recursosEspecificos}}
 	
 	{{#hasRecursos}}
-		<h1>RECURSOS </h1>
-	{{/hasRecursos}}
-	{{#recursos}}
-		<a href="/opcionRecurso/{{idRecurso}}">{{nombre}}</a>
-	{{/recursos}}
+		<div class="row">
+		  <div class="col">
+		    <div class="tabs">
+		      <div class="tab">
+		        <input type="checkbox" id="chck4">
+		        <label class="tabLabel" for="chck4">
+		       		{{#recursoActual}}
+				    	{{nombre}}
+				    {{/recursoActual}}
+				    {{^recursoActual}}
+				    	Recurso
+				    {{/recursoActual}}
+				</label>
+		         {{#recursos}}
+		       		 <div class="tabContent">
+						<a href="/opcionRecurso/{{idRecurso}}">{{nombre}}</a>
+			        </div>
+				{{/recursos}}
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	{{/hasRecursos}}	
+	</div>
 	
-	{{#detallesRecurso}} 
-	 		<h2>Nombre</h2>
-    		 {{nombre}}
-    		  {{#descripcion}} 
-    		  	 <h2>descripcion</h2>
-    			 {{descripcion}}
-    		  {{/descripcion}}
-    		  {{#codigo}} 
-    		  	 <h2>Codigo</h2>
-    			 {{codigo}}
-    		  {{/codigo}}
-    		  {{#rutaImagen}} 
-    		  	 <h2>imagen</h2>
-    			 <img alt="imagen" src="{{rutaImagen}}">
-    		  {{/rutaImagen}}
-    		  {{#parametros}} 
-    		  	 <h2>nombre parametro</h2>
-    		  	 {{nombre}}
-    			 {{#tipoDeDato}} 
-	    		  	 <h2>tipo</h2>
-	    			 {{tipoDeDato}}
-    		  	 {{/tipoDeDato}}
-    		  	 {{#direccion}} 
-	    		  	 <h2>direccion</h2>
-	    			 {{direccion}}
-    		  	 {{/direccion}}
-    		  {{/parametros}}
-    		  {{#columnas}} 
-    		  	 <h2>nombre columna</h2>
-    		  	 {{nombre}}
-    			 {{#tipoDeDato}} 
-	    		  	 <h2>tipo</h2>
-	    			 {{tipoDeDato}}
-    		  	 {{/tipoDeDato}}
-    		  {{/columnas}}
-    		  {{#claves}} 
-    		  	 <h2>nombre clave</h2>
-    		  	 {{nombre}}
-    			 {{#tipoDeClave}} 
-	    		  	 <h2>tipo</h2>
-	    			 {{tipoDeClave}}
-    		  	 {{/tipoDeClave}}
-    		  {{/claves}}
-    		  
-	{{/detallesRecurso}}
-	
-	
+		
+		
+	<div class="contenidoDerecho">
+			{{#diagramas}}
+				{{#subModuloActual}}
+					<div class="tituloDiagrama">{{nombreSubModulo.nombre}}</div>
+				{{/subModuloActual}}
+				<img src = "{{rutaDiagrama}}" class="imagenDiagrama">
+				{{#subModuloActual}}
+					<div class="descripcionDiagrama">{{descripcion}}</div>
+				{{/subModuloActual}}
+			{{/diagramas}}
+			
+			
+		
+		{{#detallesRecurso}} 
+	    		 <div class="tituloDiagrama">
+	    		 	{{nombre}}
+	    		 </div>
+	    		 
+	    		  {{#descripcion}} 
+	    		  	 <div class="descripcionDiagrama">
+	    		  	 	{{descripcion}}
+	    		  	 </div>
+	    		  {{/descripcion}}
+	    		  
+	    		  {{#codigo}} 
+	    		 	 <div class="descripcionDiagrama">
+	    			 	{{codigo}}
+	    			 </div>
+	    		  {{/codigo}}
+	    		  
+	    		  {{#rutaImagen}} 
+	    			 <img alt="{{nombre}}" src="{{rutaImagen}}" class="imagenTabla">
+	    		  {{/rutaImagen}}
+	    		  
+	    		  <div class = "columnas"> 
+	    		  	<!-- <img src="http://localhost:8080/img/logoParametro.JPG" class="logo"></img> -->
+    		  		  {{#parametros}}
+		    		  	  <div class = "datosColumnas"> 
+			    		  	 <span>{{nombre}}</span>
+		    				 {{#tipoDeDato}} 
+			    				 <span>{{tipoDeDato}}</span>
+		    		  		 {{/tipoDeDato}}
+		    		  		 {{#direccion}} 
+			    				 <span>{{direccion}}</span>
+		    		  		 {{/direccion}}
+			    		  </div> 
+		    		  {{/parametros}}
+		    	  </div>  
+		    	  
+	    		  <div class = "columnas"> 
+	    		  	<img src="http://localhost:8080/img/logoColumna.PNG" class="logo"></img>
+    		  		  {{#columnas}}
+		    		  	  <div class = "datosColumnas"> 
+			    		  	 <span>{{nombre}}</span>
+		    				 {{#tipoDeDato}} 
+			    				 <span>{{tipoDeDato}}</span>
+		    		  		 {{/tipoDeDato}}
+			    		  </div> 
+		    		  {{/columnas}}
+		    	  </div>  
+		    	  <div class = "claves"> 
+	    		  	<img src="http://localhost:8080/img/logoClave.PNG" class="logo"></img>
+    		  		  {{#claves}}
+		    		  	  <div class = "datosClaves"> 
+			    		  	 <span>{{nombre}}</span>
+		    				 {{#tipoDeClave}} 
+			    				 <span>{{tipoDeClave}}</span>
+		    		  		 {{/tipoDeClave}}
+			    		  </div> 
+		    		  {{/claves}}
+		    	  </div>  
+		{{/detallesRecurso}}
+	</div>
+</div>	
 	
 	<a href="/adminTools"><button>Herramientas BD</button></a>
+		
 	
 	
 </body>
