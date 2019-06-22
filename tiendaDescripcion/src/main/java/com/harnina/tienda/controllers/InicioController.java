@@ -28,7 +28,6 @@ public class InicioController {
 		cargarBienvenida(model,session);
 		
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
-		
 		return "inicio_template";
 	}
 	
@@ -37,6 +36,7 @@ public class InicioController {
 		this.idModuloActual = idModulo;
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		if(this.dataService.getSubModulos(this.idModuloActual).size()>0){
+			model.addAttribute("moduloActual", this.dataService.getModulo(idModulo));
 			model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
 			model.addAttribute("hasSubModulos", true );
 		}
@@ -46,6 +46,8 @@ public class InicioController {
 	@RequestMapping("/opcionSubmodulo/{idSubModulo}")
 	public String enlaceSubModulo(Model model, @PathVariable String idSubModulo) {
 		this.idSubModuloActual = idSubModulo;
+		model.addAttribute("moduloActual", this.dataService.getModulo(idModuloActual));
+		model.addAttribute("subModuloActual", this.dataService.getSubModulo(idSubModulo));
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
 		if(this.dataService.getRecursosEspecificos(idSubModulo).size()>0){
@@ -63,8 +65,10 @@ public class InicioController {
 		model.addAttribute("hasSubModulos", true );
 		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
+		model.addAttribute("moduloActual", this.dataService.getModulo(idModuloActual));
+		model.addAttribute("subModuloActual", this.dataService.getSubModulo(idSubModuloActual));
+		model.addAttribute("recursoEspecificoActual", this.dataService.getRecursoEspecifico(idRecursoEspecifico));
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
-		model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModuloActual));
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
 		if(this.dataService.getRecursos(idRecursoEspecifico).size()>0){
 			model.addAttribute("hasRecursos", true );
@@ -77,14 +81,19 @@ public class InicioController {
 	public String enlaceRecurso(Model model, @PathVariable String idRecurso) {
 		this.idRecursoActual = idRecurso;
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
-		model.addAttribute("hasSubModulos", true );
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
-		model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModuloActual));
-		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
-		model.addAttribute("hasRecursos", true );
 		model.addAttribute("recursos", this.dataService.getRecursos(idRecursoEspecificoActual));
 		model.addAttribute("detallesRecurso", this.dataService.getRecurso(idRecursoActual, idRecursoEspecificoActual));
+		
+		model.addAttribute("moduloActual", this.dataService.getModulo(idModuloActual));
+		model.addAttribute("subModuloActual", this.dataService.getSubModulo(idSubModuloActual));
+		model.addAttribute("recursoEspecificoActual", this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
+		model.addAttribute("rercursoActual", this.dataService.getRecurso(idRecurso, idRecursoEspecificoActual));
+		
+		model.addAttribute("hasSubModulos", true );
+		model.addAttribute("hasRecursosEspecificos", true );
+		model.addAttribute("hasRecursos", true );
 		return "inicio_template";
 	}
 	
