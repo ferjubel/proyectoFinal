@@ -10,4 +10,5 @@ public interface Recurseable {
 	void borrar(RecursoService recursoService);
 	String getNombre();
 	void asociarParte(ParteService parteService, Parteable parte);
+	boolean has(String string);
 }

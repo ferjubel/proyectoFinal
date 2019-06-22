@@ -7,11 +7,15 @@
 </head>
 <body>
 
+<div class = "cabecera"> Documentacion Tienda Harnina</div>
+
 {{#bienvenida}}
 	<h4>Bienvenido</h4>
 {{/bienvenida}}
 
+
 <div class="contenedorPrincipal">
+
 	<div class="menuLateralIzquierdo">
 	
 		<div class="row">
@@ -24,12 +28,12 @@
 				    	{{nombre}}
 				    {{/moduloActual}}
 				    {{^moduloActual}}
-		 				Modulo
+		 				Selecciona
 					{{/moduloActual}}
 				</label>
 		         {{#opcionesModulo}}
 		       		 <div class="tabContent">
-						<a href="/opcion/{{idModulo}}">{{nombre}}</a>
+						<a href="/opcion/{{idModulo}}"><button class="botonEnlace">{{nombre}}</button></a>
 			        </div>
 				{{/opcionesModulo}}
 		      </div>
@@ -48,12 +52,12 @@
 				    	{{nombreSubModulo.nombre}}
 				    {{/subModuloActual}}
 				    {{^subModuloActual}}
-		 				SubModulo
+		 				Selecciona
 					{{/subModuloActual}}
 				</label>
 		         {{#subModulos}}
 		       		 <div class="tabContent">
-						<a href="/opcionSubmodulo/{{idSubModulo}}">{{nombreSubModulo.nombre}}</a>
+						<a href="/opcionSubmodulo/{{idSubModulo}}"><button class="botonEnlace">{{nombreSubModulo.nombre}}</button></a>
 			        </div>
 				{{/subModulos}}
 		      </div>
@@ -73,12 +77,12 @@
 				    	{{nombreRecursoEspecifico.nombre}}
 				    {{/recursoEspecificoActual}}
 				    {{^recursoEspecificoActual}}
-		 				RecursoEspecifico
+		 				Selecciona
 					{{/recursoEspecificoActual}}
 				</label>
 		         {{#recursosEspecificos}}
 		       		 <div class="tabContent">
-						<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}">{{nombreRecursoEspecifico.nombre}}</a>
+						<a href="/opcionRecursoEspecifico/{{idRecursoEspecifico}}"><button class="botonEnlace">{{nombreRecursoEspecifico.nombre}}</button></a>
 			        </div>
 				{{/recursosEspecificos}}
 		      </div>
@@ -98,12 +102,12 @@
 				    	{{nombre}}
 				    {{/recursoActual}}
 				    {{^recursoActual}}
-				    	Recurso
+				    	Selecciona
 				    {{/recursoActual}}
 				</label>
 		         {{#recursos}}
 		       		 <div class="tabContent">
-						<a href="/opcionRecurso/{{idRecurso}}">{{nombre}}</a>
+						<a href="/opcionRecurso/{{idRecurso}}"><button class="botonEnlace">{{nombre}}</button></a>
 			        </div>
 				{{/recursos}}
 		      </div>
@@ -149,43 +153,50 @@
 	    			 <img alt="{{nombre}}" src="{{rutaImagen}}" class="imagenTabla">
 	    		  {{/rutaImagen}}
 	    		  
-	    		  <div class = "columnas"> 
-	    		  	<!-- <img src="http://localhost:8080/img/logoParametro.JPG" class="logo"></img> -->
-    		  		  {{#parametros}}
-		    		  	  <div class = "datosColumnas"> 
-			    		  	 <span>{{nombre}}</span>
-		    				 {{#tipoDeDato}} 
-			    				 <span>{{tipoDeDato}}</span>
-		    		  		 {{/tipoDeDato}}
-		    		  		 {{#direccion}} 
-			    				 <span>{{direccion}}</span>
-		    		  		 {{/direccion}}
-			    		  </div> 
-		    		  {{/parametros}}
-		    	  </div>  
+	    		  {{#hasParametros}}
+		    		  <div class = "columnas"> 
+		    		  	<img src="http://localhost:8080/img/logoParametro.JPG" class="logo"></img> 
+	    		  		  {{#parametros}}
+			    		  	  <div class = "datosColumnas"> 
+				    		  	 <span>{{nombre}}</span>
+			    				 {{#tipoDeDato}} 
+				    				 <span>{{tipoDeDato}}</span>
+			    		  		 {{/tipoDeDato}}
+			    		  		 {{#direccion}} 
+				    				 <span>{{direccion}}</span>
+			    		  		 {{/direccion}}
+				    		  </div> 
+			    		  {{/parametros}}
+			    	  </div>  
+	    		  {{/hasParametros}}
 		    	  
-	    		  <div class = "columnas"> 
-	    		  	<img src="http://localhost:8080/img/logoColumna.PNG" class="logo"></img>
-    		  		  {{#columnas}}
-		    		  	  <div class = "datosColumnas"> 
-			    		  	 <span>{{nombre}}</span>
-		    				 {{#tipoDeDato}} 
-			    				 <span>{{tipoDeDato}}</span>
-		    		  		 {{/tipoDeDato}}
-			    		  </div> 
-		    		  {{/columnas}}
-		    	  </div>  
-		    	  <div class = "claves"> 
-	    		  	<img src="http://localhost:8080/img/logoClave.PNG" class="logo"></img>
-    		  		  {{#claves}}
-		    		  	  <div class = "datosClaves"> 
-			    		  	 <span>{{nombre}}</span>
-		    				 {{#tipoDeClave}} 
-			    				 <span>{{tipoDeClave}}</span>
-		    		  		 {{/tipoDeClave}}
-			    		  </div> 
-		    		  {{/claves}}
-		    	  </div>  
+		    	  {{#hasColumnas}}
+		    		  <div class = "columnas"> 
+		    		  	<img src="http://localhost:8080/img/logoColumna.PNG" class="logo"></img>
+	    		  		  {{#columnas}}
+			    		  	  <div class = "datosColumnas"> 
+				    		  	 <span>{{nombre}}</span>
+			    				 {{#tipoDeDato}} 
+				    				 <span>{{tipoDeDato}}</span>
+			    		  		 {{/tipoDeDato}}
+				    		  </div> 
+			    		  {{/columnas}}
+			    	  </div>  
+		    	  {{/hasColumnas}}
+		    	  
+		    	  {{#hasClaves}}
+			    	  <div class = "claves"> 
+		    		  	<img src="http://localhost:8080/img/logoClave.PNG" class="logo"></img>
+	    		  		  {{#claves}}
+			    		  	  <div class = "datosClaves"> 
+				    		  	 <span>{{nombre}}</span>
+			    				 {{#tipoDeClave}} 
+				    				 <span>{{tipoDeClave}}</span>
+			    		  		 {{/tipoDeClave}}
+				    		  </div> 
+			    		  {{/claves}}
+			    	  </div>  
+		    	  {{/hasClaves}}
 		{{/detallesRecurso}}
 	</div>
 </div>	

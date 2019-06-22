@@ -94,6 +94,11 @@ public class InicioController {
 		model.addAttribute("hasSubModulos", true );
 		model.addAttribute("hasRecursosEspecificos", true );
 		model.addAttribute("hasRecursos", true );
+		
+		model.addAttribute("hasParametros", this.dataService.hasParametros(idRecurso, idRecursoEspecificoActual));
+		model.addAttribute("hasColumnas", this.dataService.hasColumnas(idRecurso, idRecursoEspecificoActual) );
+		model.addAttribute("hasClaves", this.dataService.hasClaves(idRecurso, idRecursoEspecificoActual) );
+		
 		return "inicio_template";
 	}
 	

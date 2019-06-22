@@ -125,4 +125,10 @@ public class FuncionProcedureMetodo implements Recurseable{
 	public void asociarParte(ParteService servicio,Parteable parte){
 		parte.asociarParte(servicio, this);
 	}
+
+
+	@Override
+	public boolean has(String nombre) {
+		return nombre == "Parametro";
+	}
 }
