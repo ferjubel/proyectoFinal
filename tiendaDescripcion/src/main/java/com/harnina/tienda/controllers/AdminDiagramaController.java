@@ -41,10 +41,18 @@ public class AdminDiagramaController{
 	}
 
 	
-	@RequestMapping("/adminTools/diagrama/asociar/guardar")
-	public String adminToolsDiagramaAsociarGuardar(Model model,
+	@RequestMapping("/adminTools/diagrama/asociar/subModulo/guardar")
+	public String adminToolsDiagramaAsociarSubModuloGuardar(Model model,
 			@RequestParam String idDiagrama,@RequestParam String idSubModulo){
-		this.dataService.asociarDiagrama(idDiagrama,idSubModulo);
+		this.dataService.asociarDiagramaSubModulo(idDiagrama,idSubModulo);
+		model.addAttribute("mensaje" ,"Diagrama asociado");
+		return "adminToolsAsociarDiagrama_template";
+	}
+	
+	@RequestMapping("/adminTools/diagrama/asociar/vista/guardar")
+	public String adminToolsDiagramaAsociarVistaGuardar(Model model,
+			@RequestParam String idDiagrama,@RequestParam String idVista){
+		this.dataService.asociarDiagramaVista(idDiagrama,idVista);
 		model.addAttribute("mensaje" ,"Diagrama asociado");
 		return "adminToolsAsociarDiagrama_template";
 	}

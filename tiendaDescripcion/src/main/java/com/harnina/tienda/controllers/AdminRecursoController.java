@@ -14,6 +14,7 @@ import com.harnina.tienda.model.FuncionProcedureMetodo;
 import com.harnina.tienda.model.Parametro;
 import com.harnina.tienda.model.Recurseable;
 import com.harnina.tienda.model.Tabla;
+import com.harnina.tienda.model.VistaJsp;
 import com.harnina.tienda.service.DataService;
 import com.harnina.tienda.service.UploadFileService;
 
@@ -110,6 +111,21 @@ public class AdminRecursoController{
 		}
 		return "adminToolsRecurso_template";
 	}
+	
+	@RequestMapping("/adminTools/recurso/agregar/guardarVistaJsp")
+	public String adminToolsRecursoAgregarRecursoGuardarVistaJsp(Model model,
+			@RequestParam String nombre,@RequestParam String descripcion) throws IllegalStateException, IOException {
+		VistaJsp vistaJsp = new VistaJsp(nombre,descripcion, 
+				this.dataService.getRecursoEspecifico(idRecursoEspecificoActual));
+		if(this.dataService.existRecurso(vistaJsp)){
+			model.addAttribute("mensaje" ,"El Recurso ya existe");
+		}
+		else{
+			this.dataService.guardarRecurso(vistaJsp);
+			model.addAttribute("mensaje" ,"Recurso guardado");
+		}
+		return "adminToolsRecurso_template";
+	}
 
 	@RequestMapping("/adminTools/recurso/editar/guardarFuncionProcedureMetodo")
 	public String adminToolsRecursoEditarRecursoGuardar(Model model ,FuncionProcedureMetodo recurso) {
@@ -144,7 +160,7 @@ public class AdminRecursoController{
 				nombreRecurso.equalsIgnoreCase("metodo")){
 			nombreRecurso = new String("FuncionProcedureMetodo");
 		}
-		nombreRecurso = new String(nombreRecurso.replace(nombreRecurso.charAt(0),Character.toUpperCase(nombreRecurso.charAt(0))));
+		nombreRecurso = new String(nombreRecurso.replace(nombreRecurso.charAt(0),Character.toUpperCase(nombreRecurso.charAt(0))).replaceAll(" ", ""));
 		return "adminTools"+nombreRecurso+accion+"_template";
 	}
 	

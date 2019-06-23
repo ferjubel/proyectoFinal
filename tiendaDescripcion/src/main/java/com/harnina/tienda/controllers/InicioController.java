@@ -50,11 +50,11 @@ public class InicioController {
 		model.addAttribute("subModuloActual", this.dataService.getSubModulo(idSubModulo));
 		model.addAttribute("opcionesModulo" ,this.dataService.getOpcionesModulo());
 		model.addAttribute("subModulos", this.dataService.getSubModulos(this.idModuloActual));
+		model.addAttribute("hasSubModulos", true );
+		model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModulo));
 		if(this.dataService.getRecursosEspecificos(idSubModulo).size()>0){
-			model.addAttribute("hasSubModulos", true );
 			model.addAttribute("hasRecursosEspecificos", true );
 			model.addAttribute("recursosEspecificos", this.dataService.getRecursosEspecificos(this.idSubModuloActual));
-			model.addAttribute("diagramas" , this.dataService.getDiagramas(idSubModulo));
 		}
 		return "inicio_template";
 	}

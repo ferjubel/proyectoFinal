@@ -91,4 +91,9 @@ public class Parametro implements Parteable,Comparable<Parteable>{
 		servicio.asociarParte(tabla , this);
 	}
 
+	@Override
+	public void asociarParte(ParteService parteService, VistaJsp vistaJsp) {
+		parteService.asociarParte(vistaJsp , this);
+	}
+
 }
