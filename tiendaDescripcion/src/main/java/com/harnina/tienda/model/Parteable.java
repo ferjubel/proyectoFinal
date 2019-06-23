@@ -9,4 +9,5 @@ public interface Parteable{
 	void borrar(ParteService parteService);
 	void asociarParte(ParteService servicio, FuncionProcedureMetodo recurso);
 	void asociarParte(ParteService servicio, Tabla tabla);
+	void asociarParte(ParteService parteService, VistaJsp vistaJsp);
 }

@@ -81,4 +81,9 @@ public class Columna implements Parteable,Comparable<Parteable>{
 		servicio.asociarParte(tabla , this);
 	}
 
+	@Override
+	public void asociarParte(ParteService servicio, VistaJsp vistaJsp) {
+		servicio.asociarParte(vistaJsp , this);
+	}
+
 }

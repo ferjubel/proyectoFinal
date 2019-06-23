@@ -260,6 +260,7 @@ public class DataService {
 		retorno.add("parametro");
 		retorno.add("columna");
 		retorno.add("clave");
+		retorno.add("vistaJsp");
 		return retorno;
 	}
 
@@ -281,9 +282,14 @@ public class DataService {
 		return diagramaService.getDiagramas();
 	}
 
-	public void asociarDiagrama(String idDiagrama, String idSubModulo) {
+	public void asociarDiagramaSubModulo(String idDiagrama, String idSubModulo) {
 		this.subModuloService.asociarDiagrama(this.diagramaService.getDiagrama(idDiagrama),idSubModulo);
 	}
+	
+	public void asociarDiagramaVista(String idDiagrama, String idVista) {
+		this.recursoService.asociarDiagramaVista(this.diagramaService.getDiagrama(idDiagrama),idVista);
+	}
+	
 
 	public boolean hasParametros(String idRecurso, String idRecursoEspecifico) {
 		return getRecurso(idRecurso, idRecursoEspecifico).has("Parametro");
