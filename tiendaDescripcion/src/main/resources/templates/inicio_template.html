@@ -126,19 +126,19 @@
 				<br></br>
 			{{/diagramas}}
 			
-			{{^subModuloActual}}
-				<div class="tituloDiagrama">Demostración</div>
-				<video class="imagenDiagrama" autoplay>
-					<source src="http://localhost:8080/video/tiendacarro.mp4" type="video/mp4">
-				</video>
-			{{/subModuloActual}}
-			
 			{{^recursoEspecificoActual}}
 				{{#subModuloActual}}
 					<div class="descripcionDiagrama">{{#descripcion}}{{descripcion}}{{/descripcion}}</div>
 				{{/subModuloActual}}
 			{{/recursoEspecificoActual}}
 			
+		
+		{{^detallesRecurso}}
+        	<div class="tituloDiagrama">Demostración</div>
+			<video class="imagenDiagrama" autoplay>
+				<source src="http://localhost:8080/video/tiendacarro.mp4" type="video/mp4">
+			</video>
+        {{/detallesRecurso}}
 		
 		{{#detallesRecurso}} 
 	    		 <div class="tituloDiagrama">
@@ -164,6 +164,7 @@
 	    		  {{#diagrama}}
 			        	<img src = "{{rutaDiagrama}}" class="imagenDiagrama">
 			       {{/diagrama}}
+			       
 	    		  
 	    		  {{#hasParametros}}
 		    		  <div class = "columnas"> 
