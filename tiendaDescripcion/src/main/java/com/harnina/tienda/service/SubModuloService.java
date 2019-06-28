@@ -10,7 +10,7 @@ import com.harnina.tienda.model.SubModulo;
 import com.harnina.tienda.repository.SubModuloRepository;
 
 @Component
-public class SubModuloService {
+public class SubModuloService implements Serviceable{
 	
 	@Autowired
 	private SubModuloRepository subModuloRepository;
@@ -60,7 +60,7 @@ public class SubModuloService {
 		this.subModulos = subModuloRepository.findAll();
 	}
 	
-	public void borrarSubModulo(SubModulo nombreSubModulo) {
+	protected void borrarSubModulo(SubModulo nombreSubModulo) {
 		this.subModuloRepository.delete(nombreSubModulo);
 		recargarSubModulo();
 	}
@@ -78,9 +78,17 @@ public class SubModuloService {
 	private SubModulo getSubModulo(String idSubModulo) {
 		return getSubModulo(Long.valueOf(idSubModulo));
 	}
-	
-	
 
-	
-
+	@Override
+	public Thread cargarDatosEnRam() {
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				recargarSubModulo();
+			}
+		});
+		hilo.setPriority(Thread.MAX_PRIORITY);
+		hilo.setName("subModulo");
+		return hilo;
+	}
 }

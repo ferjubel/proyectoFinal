@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.harnina.tienda.model.Clave;
 import com.harnina.tienda.model.Columna;
 import com.harnina.tienda.model.FuncionProcedureMetodo;
@@ -14,7 +13,7 @@ import com.harnina.tienda.model.Recurseable;
 import com.harnina.tienda.model.Tabla;
 
 @Component
-public class ParteService{
+public class ParteService implements Serviceable{
 
 	List <ParteServiceable> serviceLists;
 	
@@ -51,6 +50,7 @@ public class ParteService{
 
 	private void recargarPartes() {
 		this.partes = new ArrayList<>();
+		comprobarListas();
 		for (ParteServiceable servicioParte : serviceLists) {
 			this.partes.addAll(servicioParte.getPartes());
 		}
@@ -140,6 +140,18 @@ public class ParteService{
 		tablaTemp.getClaves().add(parte);
 		recursoService.guardarRecurso(tablaTemp);
 		recargarPartes();
+	}
+	
+	@Override
+	public Thread cargarDatosEnRam() {
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				recargarPartes();
+			}
+		});
+		hilo.setName("partes");
+		return hilo;
 	}
 
 }
