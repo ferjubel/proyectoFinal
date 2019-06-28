@@ -1,7 +1,12 @@
 package com.harnina.tienda.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.harnina.tienda.model.Diagrama;
@@ -40,13 +45,27 @@ public class DataService {
 	@Autowired
 	private ParteService parteService;
 	
+	private List<Serviceable> servicios;
+
+	private List<Thread> hilos;
+
+	private Integer estadoCarga;
+
+	private Integer limiteCarga;
+	
 	public DataService() {
 		super();
+	}
+	
+	@PostConstruct
+	private void cargarDatos(){
+		iniciarCargaDatosEnRAM();
 	}
 
 	
 	//MODULO
 	
+
 	public List<Modulo> getOpcionesModulo() {
 		return this.moduloService.getOpcionesModulo();
 	}
@@ -301,6 +320,52 @@ public class DataService {
 
 	public boolean hasClaves(String idRecurso, String idRecursoEspecifico) {
 		return getRecurso(idRecurso, idRecursoEspecifico).has("Clave");
+	}
+
+	public void iniciarCargaDatosEnRAM() {
+		if(this.servicios == null)iniciarListaServicios(); 
+		hilos = new ArrayList<>();
+		for (Serviceable servicio : servicios) {
+			hilos.add(servicio.cargarDatosEnRam());
+		}
+		for (Thread thread : hilos) {
+			thread.start();
+			System.out.println("iniciando" + thread.getName());
+		}
+	}
+	
+	 public Map<String,Integer> getEstadoCarga(){
+		estadoCarga = 0;
+		limiteCarga = servicios.size();
+			for (int i = 0; i < hilos.size(); i++) {
+				if(hilos.get(i).isAlive())estadoCarga ++;
+			}
+		Map<String, Integer> retorno = new HashMap<>();
+		retorno.put("actualCarga", estadoCarga);
+		retorno.put("limiteCarga", limiteCarga);
+		return retorno;
+	}
+	
+	public Thread datosListos(String nombreHilo){
+		if(this.servicios == null)iniciarListaServicios();
+		if(hilos == null)return null;
+		else
+		for (int i = 0; i < hilos.size(); i++) {
+			if(hilos.get(i).getName().equals(nombreHilo))
+				return hilos.get(i);
+		}
+		return null;
+	}
+
+	private void iniciarListaServicios() {
+		this.servicios = new ArrayList<>();
+		this.servicios.add(this.moduloService);
+		this.servicios.add(this.subModuloService);
+		this.servicios.add(this.nombreSubModuloService);
+		this.servicios.add(this.recursoEspecificoService);
+		this.servicios.add(this.nombreRecursoEspecificoService);
+		this.servicios.add(this.recursoService);
+		this.servicios.add(this.parteService);
 	}
 
 }

@@ -8,7 +8,7 @@ import com.harnina.tienda.model.RecursoEspecifico;
 import com.harnina.tienda.repository.RecursoEspecificoRepository;
 
 @Component
-public class RecursoEspecificoService {
+public class RecursoEspecificoService implements Serviceable{
 	
 	@Autowired
 	private RecursoEspecificoRepository recursoEspecificoRepository;
@@ -73,6 +73,18 @@ public class RecursoEspecificoService {
 	public void borrarRecursoEspecifico(RecursoEspecifico recursoEspecifico) {
 		this.recursoEspecificoRepository.delete(recursoEspecifico);
 		recargarRecursosEspecificos();
+	}
+
+	@Override
+	public Thread cargarDatosEnRam() {
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				recargarRecursosEspecificos();
+			}
+		});
+		hilo.setName("recursoEspecifico");
+		return hilo;
 	}
 
 	

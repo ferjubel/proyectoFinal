@@ -7,7 +7,7 @@ import com.harnina.tienda.model.NombreRecursoEspecifico;
 import com.harnina.tienda.repository.NombreRecursoEspecificoRepository;
 
 @Component
-public class NombreRecursoEspecificoService {
+public class NombreRecursoEspecificoService implements Serviceable{
 	
 	@Autowired
 	private NombreRecursoEspecificoRepository nombreRecursoEspecificoRepository;
@@ -58,4 +58,16 @@ public class NombreRecursoEspecificoService {
 		recargarLista();
 	}
 
+	@Override
+	public Thread cargarDatosEnRam() {
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				recargarLista();
+			}
+		});
+		hilo.setName("nombreRecursoEspecifico");
+		return hilo;
+	}
+	
 }

@@ -9,13 +9,20 @@
 
 <div class = "cabecera"> Documentacion Tienda Harnina</div>
 
+<!-- 
 {{#bienvenida}}
 	<h4>Bienvenido</h4>
 {{/bienvenida}}
+ -->
 
 
 <div class="contenedorPrincipal">
 
+	<div class="estadoCarga">
+		{{#estadoCarga}}
+			actualCarga {{actualCarga}} limiteCarga {{limiteCarga}}
+		{{/estadoCarga}}
+	</div>
 	<div class="menuLateralIzquierdo">
 	
 		<div class="row">
@@ -134,10 +141,12 @@
 			
 		
 		{{^detallesRecurso}}
+			{{^diagramas}}
         	<div class="tituloDiagrama">Demostración</div>
 			<video class="imagenDiagrama" autoplay>
 				<source src="http://localhost:8080/video/tiendacarro.mp4" type="video/mp4">
 			</video>
+			{{/diagramas}}
         {{/detallesRecurso}}
 		
 		{{#detallesRecurso}} 
@@ -153,7 +162,7 @@
 	    		  
 	    		  {{#codigo}} 
 	    		 	 <div class="descripcionDiagrama">
-	    			 	{{codigo}}
+	    			 	<pre>{{codigo}}</pre>
 	    			 </div>
 	    		  {{/codigo}}
 	    		  

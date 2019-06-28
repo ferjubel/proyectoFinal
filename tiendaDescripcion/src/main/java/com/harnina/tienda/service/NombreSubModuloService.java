@@ -7,7 +7,7 @@ import com.harnina.tienda.model.NombreSubModulo;
 import com.harnina.tienda.repository.NombreSubModuloRepository;
 
 @Component
-public class NombreSubModuloService {
+public class NombreSubModuloService implements Serviceable{
 	
 	@Autowired
 	private NombreSubModuloRepository nombreSubModuloRepository;
@@ -51,7 +51,18 @@ public class NombreSubModuloService {
 		this.nombreSubModuloRepository.delete(nombreSubModulo);
 		recargarNombreSubModulo();
 	}
-
+	@Override
+	public Thread cargarDatosEnRam() {
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				recargarNombreSubModulo();
+			}
+		});
+		hilo.setPriority(Thread.MAX_PRIORITY);
+		hilo.setName("nombreSubModulo");
+		return hilo;
+	}
 	
 
 }

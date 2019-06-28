@@ -11,7 +11,7 @@ import com.harnina.tienda.model.Diagrama;
 import com.harnina.tienda.model.FuncionProcedureMetodo;
 
 @Component
-public class RecursoService {
+public class RecursoService implements Serviceable{
 	
 	List <RecursoServiceable> serviceLists;
 	
@@ -54,6 +54,7 @@ public class RecursoService {
 
 	private void recargarRecursos() {
 		this.recursos = new ArrayList<>();
+		comprobarListas();
 		for (RecursoServiceable recurso : serviceLists) {
 			this.recursos.addAll(recurso.getRecursos());
 		}
@@ -120,6 +121,18 @@ public class RecursoService {
 
 	public void asociarDiagramaVista(Diagrama diagrama, String idVista) {
 		this.vistaJspService.asociarDiagrama(diagrama,idVista);
+	}
+	
+	@Override
+	public Thread cargarDatosEnRam() {
+		Thread hilo = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				recargarRecursos();
+			}
+		});
+		hilo.setName("recurso");
+		return hilo;
 	}
 
 }
